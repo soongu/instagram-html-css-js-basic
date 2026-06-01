@@ -31,6 +31,91 @@
     <hr>
 
     <section>
+      <h3>프로필 편집</h3>
+
+      <form action="/profile" method="post">
+        <fieldset>
+          <legend>기본 정보</legend>
+
+          <p>
+            <label for="display-name">이름</label>
+            <input type="text" id="display-name" name="displayName"
+                   value="홍순구" autocomplete="name" required>
+          </p>
+          <p>
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email"
+                   placeholder="you@example.com"
+                   autocomplete="email" required>
+          </p>
+          <p>
+            <label for="phone">휴대폰</label>
+            <input type="tel" id="phone" name="phone"
+                   placeholder="010-1234-5678"
+                   pattern="010-[0-9]{4}-[0-9]{4}">
+          </p>
+          <p>
+            <label for="website">웹사이트</label>
+            <input type="url" id="website" name="website"
+                   placeholder="https://my-blog.com">
+          </p>
+          <p>
+            <label for="birthday">생일</label>
+            <input type="date" id="birthday" name="birthday">
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>꾸미기</legend>
+
+          <p>
+            <label for="category">카테고리</label>
+            <select id="category" name="category">
+              <option value="">선택하세요</option>
+              <option value="dev" selected>개발</option>
+              <option value="travel">여행</option>
+              <option value="food">맛집</option>
+              <option value="daily">일상</option>
+            </select>
+          </p>
+          <p>
+            <label for="theme-color">테마 색상</label>
+            <input type="color" id="theme-color" name="themeColor" value="#e1306c">
+          </p>
+          <p>
+            <label for="post-goal">하루 게시물 목표 (1~10장)</label>
+            <input type="range" id="post-goal" name="postGoal"
+                   min="1" max="10" value="3">
+          </p>
+          <p>
+            <label for="bio">소개</label>
+            <textarea id="bio" name="bio" rows="3" maxlength="150"
+                      placeholder="자기소개를 150자 이내로 적어주세요.">풀스택 개발자 / 강의 진행 중</textarea>
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>계정 공개 범위</legend>
+          <p>
+            <label>
+              <input type="radio" name="visibility" value="public" checked>
+              전체 공개
+            </label>
+            <label>
+              <input type="radio" name="visibility" value="private">
+              비공개
+            </label>
+          </p>
+        </fieldset>
+
+        <button type="submit">저장하기</button>
+        <button type="reset">되돌리기</button>
+      </form>
+    </section>
+
+    <hr>
+
+    <section>
       <h3>내 게시물</h3>
 
       <figure>
