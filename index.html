@@ -25,10 +25,34 @@
         로그인하고 <strong>실시간</strong>으로
         친구들의 사진과 동영상을 확인하세요.
       </p>
+
+      <form action="/login" method="post">
+        <p>
+          <label for="username">사용자 이름</label>
+          <input type="text" id="username" name="username"
+                 placeholder="아이디 또는 이메일"
+                 autocomplete="username"
+                 required minlength="3" maxlength="20">
+        </p>
+        <p>
+          <label for="password">비밀번호</label>
+          <input type="password" id="password" name="password"
+                 placeholder="비밀번호 (8자 이상)"
+                 autocomplete="current-password"
+                 required minlength="8">
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" name="remember" value="yes">
+            로그인 정보 저장
+          </label>
+        </p>
+        <button type="submit">로그인</button>
+      </form>
+
       <p>
         <a href="#reset-password">비밀번호를 잊으셨나요?</a>
       </p>
-      <!-- 로그인 폼은 A-4 모듈에서 추가합니다 -->
     </section>
 
     <hr>
