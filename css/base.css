@@ -34,13 +34,12 @@ h2 + p {
 }
 
 #username {
-  background-color: #fafafa;
+  background-color: #efefef;
 }
 
-/* ===== :has() — 체크박스가 켜진 줄을 강조 ===== */
+/* ===== :has() — 체크박스가 켜진 줄의 배경을 강조 ===== */
 .login-form p:has(input:checked) {
-  color: #0095f6;
-  font-weight: bold;
+  background-color: #e7f3ff;
 }
 
 /* ===== 중첩(Nesting)으로 폼 스타일 묶기 ===== */
