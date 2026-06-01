@@ -28,6 +28,19 @@
              width="600" height="600">
         <figcaption>오늘의 일상 — 제주도 협재 해변 #sunset #travel</figcaption>
       </figure>
+
+      <p>
+        <button type="button" popovertarget="postMenu">⋯ 더보기</button>
+        <button type="button" command="show-modal" commandfor="shareDialog">공유</button>
+      </p>
+
+      <form action="/comments" method="post">
+        <label for="comment-1">댓글 달기</label>
+        <textarea id="comment-1" name="comment" rows="2"
+                  placeholder="댓글을 입력하세요..."
+                  maxlength="200" required></textarea>
+        <button type="submit">게시</button>
+      </form>
     </article>
 
     <article>
@@ -123,6 +136,34 @@
         <p>이 브라우저는 audio 태그를 지원하지 않아요.</p>
       </audio>
     </article>
+
+    <!-- 게시물 더보기 메뉴 (Popover API) -->
+    <div popover id="postMenu">
+      <p>게시물 메뉴</p>
+      <ul>
+        <li><a href="#report">신고하기</a></li>
+        <li><a href="#unfollow">팔로우 취소</a></li>
+        <li><a href="#copy-link">링크 복사</a></li>
+      </ul>
+      <button type="button" popovertarget="postMenu" popovertargetaction="hide">닫기</button>
+    </div>
+
+    <!-- 공유 다이얼로그 (dialog + 인보커 커맨드) -->
+    <dialog id="shareDialog">
+      <h2>공유하기</h2>
+      <p>이 게시물을 친구에게 보내보세요.</p>
+
+      <form action="/share" method="post">
+        <label for="share-to">받는 사람</label>
+        <input type="text" id="share-to" name="shareTo"
+               placeholder="친구 아이디" required>
+        <button type="submit">보내기</button>
+      </form>
+
+      <form method="dialog">
+        <button type="submit">닫기</button>
+      </form>
+    </dialog>
   </main>
 
   <footer>
