@@ -1,0 +1,53 @@
+/* instagram-clone-frontend/css/base.css */
+
+/* ===== 페이지 바탕 (태그 선택자) ===== */
+body {
+  background-color: #fafafa;
+  color: #262626;
+  font-family: "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+}
+
+a {
+  color: #00376b;
+  text-decoration: none;
+}
+
+/* ===== 헤더 네비게이션 (관계 선택자) ===== */
+header nav a {
+  color: #262626;
+  font-weight: bold;
+}
+
+.nav-menu > li {
+  color: #8e8e8e;
+}
+
+h2 + p {
+  color: #8e8e8e;
+}
+
+/* ===== 로그인 폼 (클래스 / ID 선택자 + :has + 중첩) ===== */
+.login-form {
+  background-color: #ffffff;
+
+  & label {
+    color: #8e8e8e;
+    font-weight: bold;
+  }
+
+  & .btn-login {
+    background-color: #0095f6;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  /* '로그인 정보 저장'을 체크하면 그 줄을 파랗게 */
+  & p:has(input:checked) {
+    color: #0095f6;
+    font-weight: bold;
+  }
+}
+
+#username {
+  background-color: #fafafa;
+}

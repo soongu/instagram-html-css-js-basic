@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instagram - 로그인</title>
+  <link rel="stylesheet" href="css/base.css">
 </head>
 <body>
   <header>
     <h1><a href="index.html">Instagram</a></h1>
     <nav>
-      <ul>
+      <ul class="nav-menu">
         <li><a href="index.html">홈</a></li>
         <li><a href="explore.html">탐색</a></li>
         <li><a href="feed.html">피드</a></li>
@@ -26,7 +27,7 @@
         친구들의 사진과 동영상을 확인하세요.
       </p>
 
-      <form action="/login" method="post">
+      <form class="login-form" action="/login" method="post">
         <p>
           <label for="username">사용자 이름</label>
           <input type="text" id="username" name="username"
@@ -47,7 +48,7 @@
             로그인 정보 저장
           </label>
         </p>
-        <button type="submit">로그인</button>
+        <button type="submit" class="btn-login">로그인</button>
       </form>
 
       <p>
