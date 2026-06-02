@@ -2,12 +2,11 @@
 
 /* ===== 게시물 카드 셸 ===== */
 article {
-  max-width: 32rem;
-  margin: 1rem auto;
-  border: 1px solid #dbdbdb;
-  border-radius: 8px;
-  background-color: #ffffff;
-  overflow: hidden;
+  max-width: var(--feed-w);
+  margin: 0 auto 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
 }
 
 /* 사진·영상은 카드 너비를 꽉 채우기 */
@@ -22,16 +21,34 @@ article figure video {
   display: block;
 }
 
+/* 오디오 플레이어는 좌우 여백 안쪽에 */
+article audio {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 0.5rem 1rem;
+}
+
+/* 본문 좌우 여백을 한 번에 — 사진만 가장자리까지, 나머지는 1rem 안쪽 */
 article figcaption,
 .post-header,
 .post-actions,
 .tag-list,
-.comment-form {
+.comment-form,
+.post-likes,
+.post-caption,
+.post-comments {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-/* ===== 게시물 헤더 — 아바타·작성자 ===== */
+/* ===== 게시물 헤더 — 아바타·작성자·시간·더보기 ===== */
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text);
+}
+
 .post-avatar {
   width: 32px;
   height: 32px;
@@ -39,32 +56,90 @@ article figcaption,
 }
 
 .post-author {
-  font-size: 0.95rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.post-time {
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
+}
+
+.post-time::before {
+  content: "•";
+  margin-right: 0.5rem;
 }
 
 .post-more {
   border: none;
   background: none;
-  font-size: 1.2rem;
+  padding: 0.25rem;
   cursor: pointer;
 }
 
-/* ===== 액션 바 아이콘 버튼 ===== */
+/* ===== 액션 바 아이콘 버튼 (SVG) ===== */
 .icon-btn {
+  display: flex;
+  align-items: center;
+  padding: 0;
   border: none;
   background: none;
-  padding: 0.25rem;
-  font-size: 1.4rem;
   cursor: pointer;
+}
+
+.icon-btn .ico {
+  width: 26px;
+  height: 26px;
+}
+
+.post-actions {
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+/* 좋아요는 누르면 빨갛게 — 활성 상태 색 (정적 데모) */
+.icon-btn-like.is-active {
+  color: var(--ig-red);
+}
+
+/* ===== 좋아요 수 · 캡션 · 댓글 ===== */
+.post-likes {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.post-caption {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+.post-caption strong {
+  margin-right: 0.4rem;
+  font-weight: 600;
+}
+
+.post-caption .more {
+  color: var(--color-text-soft);
+  cursor: pointer;
+}
+
+.post-comments {
+  margin: 0.25rem 0 0.75rem;
+}
+
+.post-comments a {
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
 }
 
 /* ===== 해시태그 칩 ===== */
 .tag-list a {
   display: inline-block;
   padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  background-color: #efefef;
-  color: #00376b;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-divider);
+  color: var(--color-link);
   font-size: 0.85rem;
 }
 
@@ -72,25 +147,124 @@ article figcaption,
 .comment-form {
   padding-top: 0.5rem;
   padding-bottom: 0.75rem;
+  border-top: 1px solid var(--color-divider);
 }
 
 .comment-form label {
-  color: #8e8e8e;
+  color: var(--color-text-soft);
   font-size: 0.9rem;
 }
 
 .comment-form textarea {
   padding: 0.5rem;
-  border: 1px solid #dbdbdb;
-  border-radius: 4px;
+  border: none;
   resize: none;
   font-family: inherit;
+}
+
+.comment-form textarea:focus {
+  outline: none;
 }
 
 .comment-form button {
   border: none;
   background: none;
-  color: #0095f6;
-  font-weight: bold;
+  color: var(--ig-blue);
+  font-weight: 600;
   cursor: pointer;
+}
+
+/* ===== 스토리 링 — 무지개 테두리 안에 동그란 아바타 ===== */
+.story-ring {
+  display: inline-block;
+  padding: 2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.story-avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--color-surface);
+  object-fit: cover;
+}
+
+.story-name {
+  max-width: 64px;
+  overflow: hidden;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== 추천 사이드바 — 내 미니 프로필 ===== */
+.me-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.me-info strong {
+  font-size: 0.875rem;
+}
+
+.me-info span {
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
+}
+
+.me-switch {
+  color: var(--ig-blue);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ===== 추천 헤더 + 추천 목록 ===== */
+.aside-head .aside-title {
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.aside-head a {
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.suggest-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.suggest-info strong {
+  display: block;
+  font-size: 0.875rem;
+}
+
+.suggest-info span {
+  color: var(--color-text-soft);
+  font-size: 0.75rem;
+}
+
+.suggest-follow {
+  border: none;
+  background: none;
+  color: var(--ig-blue);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===== 사이드바 푸터 링크 ===== */
+.aside-footer {
+  color: #c7c7c7;
+  font-size: 0.75rem;
+}
+
+.aside-footer a {
+  color: #c7c7c7;
 }

@@ -122,10 +122,18 @@ article {
 /* 태블릿 이상 — 카드 틀 복원 (가운데 정렬 + 둥근 모서리) */
 @media (min-width: 600px) {
   article {
-    max-width: 32rem;
+    max-width: var(--feed-w);
     margin-left: auto;
     margin-right: auto;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
+  }
+}
+
+/* ===== 우측 추천 사이드바 — 넓은 데스크톱(1264px↑)에서만 ===== */
+/* 좁아지면 사이드바를 숨기고 가운데 피드 한 컬럼만 남긴다 */
+@media (max-width: 1263px) {
+  .feed-aside {
+    display: none;
   }
 }
 
