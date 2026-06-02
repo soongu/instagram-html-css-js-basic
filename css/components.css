@@ -433,9 +433,11 @@ article audio {
 }
 
 /* 카드 안 로그인 폼 — 자체 테두리/여백 제거 + 세로 컬럼으로 폭 통일 */
+/* (기본 .login-form 의 width:90%/margin:auto 를 카드 폭 100%로 덮어쓴다) */
 .login-card .login-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: none;
   margin: 0;
   padding: 0;
