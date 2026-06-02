@@ -25,9 +25,9 @@ body > header {
   z-index: 100;
 }
 
-/* 고정 헤더가 본문 첫 줄을 가리지 않도록 그만큼 아래로 밀기 */
+/* 고정 헤더가 본문 첫 줄을 가리지 않도록 + 여유 간격까지 아래로 밀기 */
 main {
-  padding-top: 5rem;
+  padding-top: 6.5rem;
 }
 
 /* ===== 게시물 사진 위 뱃지 오버레이 (position: absolute) ===== */
@@ -64,7 +64,7 @@ main > h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100dvh - 5rem);
+  min-height: calc(100dvh - 6.5rem);
 }
 
 /* ===== 게시물 헤더 — 아바타·작성자·더보기 한 줄 ===== */
