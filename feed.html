@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
   <header>
@@ -35,9 +36,19 @@
 
       <figure class="post-photo">
         <span class="post-badge">NEW</span>
-        <img src="https://picsum.photos/seed/insta1/600/600"
-             alt="석양이 지는 제주도 협재 해변 — 하늘이 주황빛으로 물들었다"
-             width="600" height="600">
+        <picture>
+          <!-- 큰 화면(600px↑): 가로로 넓은 풍경 컷 -->
+          <source media="(min-width: 600px)"
+                  srcset="https://picsum.photos/seed/insta1wide/800/450">
+          <!-- 기본(폰): 정사각형 + 해상도별 3종 -->
+          <img src="https://picsum.photos/seed/insta1/600/600"
+               srcset="https://picsum.photos/seed/insta1/400/400 400w,
+                       https://picsum.photos/seed/insta1/600/600 600w,
+                       https://picsum.photos/seed/insta1/800/800 800w"
+               sizes="(min-width: 600px) 32rem, 100vw"
+               alt="석양이 지는 제주도 협재 해변 — 하늘이 주황빛으로 물들었다"
+               width="600" height="600">
+        </picture>
         <figcaption>오늘의 일상 — 제주도 협재 해변</figcaption>
       </figure>
 
