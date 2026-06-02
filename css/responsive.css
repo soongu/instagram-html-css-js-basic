@@ -1,0 +1,55 @@
+/* instagram-clone-frontend/css/responsive.css */
+
+/* ===== 게시물 격자 — 화면 너비에 따라 1·2·3열 ===== */
+/* 모바일 퍼스트: 기본은 1열(폰), min-width로 칸을 늘려간다 */
+/* layout.css의 repeat(3, 1fr) 고정을 덮어쓴다 — 나중에 로드된 파일이 이긴다 */
+.post-grid {
+  grid-template-columns: 1fr;
+}
+
+/* 태블릿 — 600px 이상이면 2열 */
+@media (min-width: 600px) {
+  .post-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 데스크톱 — 1024px 이상이면 3열 */
+@media (min-width: 1024px) {
+  .post-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== 피드 카드 — 모바일에선 화면 끝까지(full-bleed) ===== */
+/* 폰에선 좌우 여백·둥근 모서리를 없애 꽉 차게 (실제 인스타 느낌) */
+article {
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
+}
+
+/* 태블릿 이상 — 카드 틀 복원 (가운데 정렬 + 둥근 모서리) */
+@media (min-width: 600px) {
+  article {
+    max-width: 32rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+  }
+}
+
+/* ===== 컨테이너 쿼리 — 화면이 아니라 '부모 칸' 크기에 반응 ===== */
+/* 각 격자 칸(figure)을 컨테이너로 선언 */
+.post-grid figure {
+  container-type: inline-size;
+  container-name: post-cell;
+}
+
+/* 칸 너비가 200px 이상으로 넓어지면 설명 글씨를 키운다 */
+@container post-cell (min-width: 200px) {
+  .post-grid figcaption {
+    font-size: 1rem;
+  }
+}
