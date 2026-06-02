@@ -13,7 +13,8 @@
 }
 
 /* ===== 상단 네비게이션 바 고정 (position: fixed) ===== */
-header {
+/* body 직계 헤더만 고정 — article 안 .post-header까지 잡지 않도록 범위 제한 */
+body > header {
   position: fixed;
   top: 0;
   left: 0;
