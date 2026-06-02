@@ -1,5 +1,90 @@
 /* instagram-clone-frontend/css/layout.css */
 
+/* =================================================================
+   앱 셸 (로그인 후 화면) — 데스크톱 좌측 사이드바 + 모바일 상·하단 바
+   ================================================================= */
+
+/* ===== 데스크톱 좌측 사이드바 (세로 고정 내비) ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.75rem 1.25rem;
+  border-right: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  z-index: 100;
+}
+
+.sidebar-logo {
+  padding: 1.5rem 0.75rem 1.25rem;
+}
+
+/* 좁은 레일에서만 보이는 카메라 마크는 기본 숨김 */
+.sidebar-logo .logo-mark {
+  display: none;
+}
+
+.sidebar-menu {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* 사이드바 항목 — 아이콘 + 라벨 한 줄 */
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.sidebar a:hover {
+  background-color: var(--color-hover);
+}
+
+/* 지금 보고 있는 메뉴는 굵게 */
+.sidebar a[aria-current="page"] {
+  font-weight: 700;
+}
+
+.sidebar-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+/* '더 보기'는 맨 아래로 */
+.sidebar-more {
+  margin-top: auto;
+}
+
+/* ===== 모바일 상단 바 · 하단 탭바 — 데스크톱에서는 숨김 ===== */
+.topbar,
+.tabbar {
+  display: none;
+}
+
+/* ===== 본문은 사이드바 너비만큼 오른쪽으로 ===== */
+.app main {
+  margin-left: var(--sidebar-w);
+  padding-top: 1.5rem;
+}
+
+/* =================================================================
+   로그인(로그아웃 상태) 페이지 — index.html 전용 상단 헤더
+   ================================================================= */
+
 /* ===== 네비게이션 메뉴 가로 배치 (Flexbox) ===== */
 /* 지난 모듈의 inline-block을 flex로 바꿔, 정렬·간격까지 한 번에 잡는다 */
 .nav-menu {
@@ -53,13 +138,16 @@ body > header h1 {
   z-index: 1;
 }
 
-/* ===== 섹션 제목이 스크롤하다 멈추기 (position: sticky) ===== */
-main > h2 {
-  position: sticky;
-  top: 4rem;
-  margin: 0;
-  padding: 0.5rem 0;
-  background-color: #fafafa;
+/* ===== 피드의 "피드" 제목 — 화면엔 숨기고 스크린리더에만 (실제 인스타엔 없음) ===== */
+.app main > h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* ===== 로그인 폼 화면 정중앙 (Flexbox 센터링) ===== */

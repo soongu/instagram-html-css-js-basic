@@ -6,24 +6,58 @@
   <title>Instagram - 프로필</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
-  <header>
-    <h1><a href="index.html">Instagram</a></h1>
-    <nav>
-      <ul class="nav-menu">
-        <li><a href="index.html">홈</a></li>
-        <li><a href="explore.html">탐색</a></li>
-        <li><a href="feed.html">피드</a></li>
-        <li><a href="profile.html">프로필</a></li>
-      </ul>
-    </nav>
+<body class="app">
+  <!-- 모바일 상단 바 (작은 화면에서만 보임) -->
+  <header class="topbar">
+    <h1 class="logo"><a href="index.html">Instagram</a></h1>
+    <div class="topbar-actions">
+      <a href="#notifications" aria-label="알림">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart"></use></svg>
+      </a>
+      <a href="#messages" aria-label="메시지">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-message"></use></svg>
+      </a>
+    </div>
   </header>
+
+  <!-- 데스크톱 좌측 사이드바 -->
+  <nav class="sidebar" aria-label="주요 메뉴">
+    <h1 class="logo sidebar-logo">
+      <a href="index.html">
+        <span class="logo-text">Instagram</span>
+        <svg class="ico logo-mark" aria-hidden="true"><use href="assets/icons.svg#ico-instagram"></use></svg>
+      </a>
+    </h1>
+    <ul class="sidebar-menu">
+      <li><a href="feed.html">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-home"></use></svg><span>홈</span></a></li>
+      <li><a href="#search">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-search"></use></svg><span>검색</span></a></li>
+      <li><a href="#explore">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-explore"></use></svg><span>탐색 탭</span></a></li>
+      <li><a href="#reels">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-reels"></use></svg><span>릴스</span></a></li>
+      <li><a href="#messages">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-message"></use></svg><span>메시지</span></a></li>
+      <li><a href="#notifications">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart"></use></svg><span>알림</span></a></li>
+      <li><a href="#create">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-create"></use></svg><span>만들기</span></a></li>
+      <li><a href="#dashboard">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-dashboard"></use></svg><span>대시보드</span></a></li>
+      <li><a href="profile.html" aria-current="page">
+        <img class="sidebar-avatar" src="https://picsum.photos/seed/avatar1/64/64"
+             alt="내 프로필" width="24" height="24"><span>프로필</span></a></li>
+    </ul>
+    <a class="sidebar-more" href="#more">
+      <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-menu"></use></svg><span>더 보기</span></a>
+  </nav>
 
   <main>
     <section class="profile-header">
@@ -119,8 +153,19 @@
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2026 Instagram Clone Project</p>
-  </footer>
+  <!-- 모바일 하단 탭바 (작은 화면에서만 보임) -->
+  <nav class="tabbar" aria-label="하단 탭">
+    <a href="feed.html" aria-label="홈">
+      <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-home"></use></svg></a>
+    <a href="#search" aria-label="검색">
+      <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-search"></use></svg></a>
+    <a href="#reels" aria-label="릴스">
+      <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-reels"></use></svg></a>
+    <a href="#create" aria-label="만들기">
+      <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-create"></use></svg></a>
+    <a href="profile.html" aria-current="page" aria-label="프로필">
+      <img class="tabbar-avatar" src="https://picsum.photos/seed/avatar1/64/64"
+           alt="내 프로필" width="24" height="24"></a>
+  </nav>
 </body>
 </html>
