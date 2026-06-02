@@ -60,94 +60,171 @@
   </nav>
 
   <main>
+    <!-- 프로필 헤더 -->
     <section class="profile-header">
-      <img class="profile-avatar"
-           src="https://picsum.photos/seed/avatar1/150/150"
-           alt="홍순구님의 프로필 사진"
-           width="150" height="150">
-      <h2 class="profile-name">홍순구</h2>
-      <ul class="profile-stats">
-        <li><strong>42</strong> 게시물</li>
-        <li><strong>8,500</strong> 팔로워</li>
-        <li><strong>312</strong> 팔로잉</li>
-      </ul>
-      <p class="profile-bio">@hong_tutor · 풀스택 개발자 / 강의 진행 중</p>
+      <div class="profile-avatar-wrap">
+        <img class="profile-avatar"
+             src="https://picsum.photos/seed/avatar1/300/300"
+             alt="홍순구님의 프로필 사진"
+             width="150" height="150">
+      </div>
+      <div class="profile-meta">
+        <div class="profile-row1">
+          <h2 class="profile-username">soongu_hong</h2>
+          <a class="btn-edit" href="#edit">프로필 편집</a>
+          <a class="btn-edit" href="#archive">보관함 보기</a>
+          <button type="button" class="profile-settings" aria-label="설정">
+            <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-settings"></use></svg>
+          </button>
+        </div>
+        <ul class="profile-stats">
+          <li>게시물 <strong>49</strong></li>
+          <li>팔로워 <strong>338</strong></li>
+          <li>팔로우 <strong>210</strong></li>
+        </ul>
+        <p class="profile-name">홍순구</p>
+        <p class="profile-bio">
+          풀스택 개발자 · 강의 진행 중<br>
+          #개발 #강의 #풀스택 #인스타클론<br>
+          <a href="https://github.com/soongu" target="_blank" rel="noopener noreferrer">github.com/soongu</a>
+        </p>
+      </div>
     </section>
 
+    <!-- 스토리 하이라이트 -->
+    <section class="highlights" aria-label="스토리 하이라이트">
+      <ul class="highlights-track">
+        <li class="highlight"><a href="#highlight">
+          <span class="highlight-cover"><img src="https://picsum.photos/seed/hl1/120/120" alt="일상 하이라이트" width="77" height="77"></span>
+          <span class="highlight-name">일상</span></a></li>
+        <li class="highlight"><a href="#highlight">
+          <span class="highlight-cover"><img src="https://picsum.photos/seed/hl2/120/120" alt="여행 하이라이트" width="77" height="77"></span>
+          <span class="highlight-name">여행</span></a></li>
+        <li class="highlight"><a href="#highlight">
+          <span class="highlight-cover"><img src="https://picsum.photos/seed/hl3/120/120" alt="강의 하이라이트" width="77" height="77"></span>
+          <span class="highlight-name">강의</span></a></li>
+        <li class="highlight"><a href="#highlight">
+          <span class="highlight-cover"><img src="https://picsum.photos/seed/hl4/120/120" alt="맛집 하이라이트" width="77" height="77"></span>
+          <span class="highlight-name">맛집</span></a></li>
+        <li class="highlight"><a href="#highlight">
+          <span class="highlight-cover"><img src="https://picsum.photos/seed/hl5/120/120" alt="코딩 하이라이트" width="77" height="77"></span>
+          <span class="highlight-name">코딩</span></a></li>
+        <li class="highlight"><a href="#highlight">
+          <span class="highlight-cover"><img src="https://picsum.photos/seed/hl6/120/120" alt="운동 하이라이트" width="77" height="77"></span>
+          <span class="highlight-name">운동</span></a></li>
+        <li class="highlight"><a href="#new-highlight">
+          <span class="highlight-cover highlight-new" aria-hidden="true">+</span>
+          <span class="highlight-name">신규</span></a></li>
+      </ul>
+    </section>
+
+    <!-- 프로필 탭바 -->
+    <nav class="profile-tabs" aria-label="프로필 탭">
+      <a href="#posts" aria-current="page">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-grid"></use></svg>게시물</a>
+      <a href="#reels">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-reels"></use></svg>릴스</a>
+      <a href="#saved">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-save"></use></svg>저장됨</a>
+      <a href="#tagged">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-tagged"></use></svg>태그됨</a>
+    </nav>
+
+    <!-- 게시물 격자 -->
     <section class="profile-posts">
-      <h3>내 게시물</h3>
+      <h2 class="sr-only">내 게시물</h2>
 
       <div class="post-grid">
         <figure>
           <img src="https://picsum.photos/seed/myinsta1/300/300"
                alt="새벽 작업실 책상 위 키보드와 듀얼 모니터"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>오늘의 작업실 #coding</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>1,240</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>32</span>
+          </div>
         </figure>
 
         <figure>
           <img src="https://picsum.photos/seed/myinsta2/300/300"
                alt="강의장 화이트보드에 그려진 시스템 아키텍처 도식"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>오늘의 강의 #teaching</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>860</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>18</span>
+          </div>
         </figure>
 
         <figure>
+          <span class="grid-badge"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-reels"></use></svg></span>
           <img src="https://picsum.photos/seed/myinsta3/300/300"
                alt="저녁 노을이 물든 서울 한강 풍경"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>퇴근길 한강 #sunset</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>3,015</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>121</span>
+          </div>
         </figure>
 
         <figure>
           <img src="https://picsum.photos/seed/myinsta4/300/300"
                alt="책상 위에 놓인 커피와 노트북"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>오전 코딩 한 잔 #coffee</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>540</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>9</span>
+          </div>
         </figure>
 
         <figure>
           <img src="https://picsum.photos/seed/myinsta5/300/300"
                alt="개발 서적이 쌓인 책장"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>이번 달 읽을 책 #booklist</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>712</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>24</span>
+          </div>
         </figure>
 
         <figure>
           <img src="https://picsum.photos/seed/myinsta6/300/300"
                alt="동료들과 함께한 팀 점심 식사"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>팀 점심 #foodie</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>198</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>7</span>
+          </div>
         </figure>
 
         <figure>
+          <span class="grid-badge"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-reels"></use></svg></span>
           <img src="https://picsum.photos/seed/myinsta7/300/300"
                alt="해질녘 산책로를 달리는 러닝 트랙"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>저녁 러닝 #running</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>4,820</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>203</span>
+          </div>
         </figure>
 
         <figure>
           <img src="https://picsum.photos/seed/myinsta8/300/300"
                alt="창밖으로 보이는 도시 야경"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>야근 뷰 #nightview</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>1,002</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>41</span>
+          </div>
         </figure>
 
         <figure>
           <img src="https://picsum.photos/seed/myinsta9/300/300"
                alt="주말 등산길에서 바라본 산 정상 풍경"
-               width="300" height="300"
-               loading="lazy">
-          <figcaption>주말 등산 #mountain</figcaption>
+               width="300" height="300" loading="lazy">
+          <div class="grid-overlay">
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart-fill"></use></svg>665</span>
+            <span class="grid-stat"><svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg>15</span>
+          </div>
         </figure>
       </div>
     </section>

@@ -218,80 +218,156 @@ body > header h1 {
   list-style: none;
 }
 
-/* ===== 프로필 콘텐츠 폭 가두기 — 화면 전체로 퍼지지 않게 ===== */
-/* 카드(article)와 같은 32rem로 가운데 정렬, 페이지마다 본문 폭을 통일 */
-.profile-posts {
-  max-width: 32rem;
-  margin: 0 auto;
+/* =================================================================
+   프로필 페이지 — 헤더 + 스토리 하이라이트 + 탭바 + 격자
+   네 영역 모두 935px 폭으로 가운데 정렬 + 좌우 1.5rem 여백으로 정렬 통일
+   ================================================================= */
+
+/* ===== 프로필 헤더 — 왼쪽 큰 아바타, 오른쪽 정보 ===== */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 935px;
+  margin: 2rem auto 2.5rem;
+  padding: 0 1.5rem;
 }
 
-/* ===== 프로필 게시물 3열 격자 (CSS Grid) ===== */
-/* 가로·세로를 동시에 맞추는 2차원 배치 — Flexbox로는 빠듯했던 격자 */
+/* 아바타 칸 — 아바타를 가운데 두고 넉넉한 폭 확보 */
+.profile-avatar-wrap {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 290px;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-meta {
+  flex: 1;
+}
+
+/* 첫 줄 — 사용자명 + 편집 버튼 + 설정 */
+.profile-row1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.profile-username {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+/* 통계 — 게시물·팔로워·팔로우 한 줄 */
+.profile-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-name {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+}
+
+.profile-bio {
+  margin: 0;
+}
+
+/* ===== 스토리 하이라이트 — 동그란 커버 가로 줄 ===== */
+.highlights {
+  max-width: 935px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.highlights::-webkit-scrollbar {
+  display: none;
+}
+
+.highlights-track {
+  display: flex;
+  gap: 1.75rem;
+  margin: 0;
+  padding: 1rem 0;
+  list-style: none;
+}
+
+.highlight a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 80px;
+  color: var(--color-text);
+}
+
+/* ===== 프로필 탭바 — 게시물·릴스·저장됨·태그됨 ===== */
+.profile-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  max-width: 935px;
+  margin: 0 auto;
+  border-top: 1px solid var(--color-border);
+}
+
+.profile-tabs a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: -1px;
+  padding: 1rem 0;
+  color: var(--color-text-soft);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* 지금 보고 있는 탭만 검은 윗줄 + 진한 글자 */
+.profile-tabs a[aria-current="page"] {
+  color: var(--color-text);
+  border-top: 1px solid var(--color-text);
+}
+
+/* ===== 게시물 격자 ===== */
+.profile-posts {
+  max-width: 935px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+}
+
 .post-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
 }
 
-/* 격자 칸 안의 사진은 칸 너비를 꽉 채우기 */
+/* 격자 칸 — 정사각형으로 잘라 채우기 + 오버레이 기준점 */
 .post-grid figure {
+  position: relative;
   margin: 0;
+  aspect-ratio: 1;
 }
 
 .post-grid img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-}
-
-.post-grid figcaption {
-  padding: 0.25rem;
-  color: #8e8e8e;
-  font-size: 0.8rem;
-}
-
-/* ===== 프로필 헤더 — 이름으로 영역 배치 (grid-template-areas) ===== */
-/* 왼쪽 아바타 한 칸, 오른쪽에 이름·통계·소개를 세 줄로 쌓는다 */
-.profile-header {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-areas:
-    "avatar name"
-    "avatar stats"
-    "avatar bio";
-  align-items: center;
-  gap: 0.5rem 1.5rem;
-  max-width: 32rem;
-  margin: 2.5rem auto 1.5rem;
-}
-
-.profile-avatar {
-  grid-area: avatar;
-  border-radius: 50%;
-}
-
-.profile-name {
-  grid-area: name;
-  margin: 0;
-}
-
-.profile-stats {
-  grid-area: stats;
-}
-
-.profile-bio {
-  grid-area: bio;
-  margin: 0;
-}
-
-/* ===== 프로필 통계 — 한 줄 정렬은 Flexbox (Grid + Flexbox 조합) ===== */
-/* 큰 배치는 Grid가, 칸 안의 한 줄 나열은 Flexbox가 맡는다 */
-.profile-stats {
-  display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  object-fit: cover;
 }
 
 /* =================================================================

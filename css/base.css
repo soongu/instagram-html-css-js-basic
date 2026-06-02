@@ -126,6 +126,18 @@ h2 + p {
   cursor: pointer;
 }
 
+/* ===== 화면엔 숨기고 스크린리더에만 읽히는 제목 ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* ===== 공통 아이콘 — <use href="assets/icons.svg#...">로 불러 쓴다 ===== */
 .ico {
   width: 24px;
