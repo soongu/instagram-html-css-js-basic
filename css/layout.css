@@ -295,7 +295,7 @@ body > header h1 {
 .feed-layout {
   display: flex;
   justify-content: center;
-  gap: 1.75rem;
+  gap: 4rem;
   max-width: 935px;
   margin: 0 auto;
 }

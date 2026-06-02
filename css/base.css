@@ -41,7 +41,7 @@
 /* ===== 페이지 바탕 (태그 선택자 + 타이포그래피) ===== */
 body {
   margin: 0;
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-base);
   font-size: 0.875rem;
