@@ -167,3 +167,23 @@ article {
     font-size: 1rem;
   }
 }
+
+/* ===== 로그인 페이지 — 좁은 화면에선 히어로 숨기고 카드만 가운데 ===== */
+@media (max-width: 875px) {
+  .login-hero {
+    display: none;
+  }
+  .login-panel {
+    flex: 0 0 350px;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-panel {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+  .login-card {
+    padding: 2rem 1.5rem 1.25rem;
+  }
+}

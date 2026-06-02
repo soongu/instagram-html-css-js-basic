@@ -472,3 +472,36 @@ body > header h1 {
   padding: 0;
   list-style: none;
 }
+
+/* =================================================================
+   로그인 페이지 (로그아웃 상태 — 앱 셸 없음)
+   ================================================================= */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 1rem 1rem;
+}
+
+.login-split {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+}
+
+.login-hero {
+  flex: 0 1 460px;
+  text-align: center;
+}
+
+.login-panel {
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -371,3 +371,157 @@ article audio {
   color: #ffffff;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
 }
+
+/* =================================================================
+   로그인 페이지 시각 스타일
+   ================================================================= */
+
+/* 본문 main 의 기본 윗여백 제거 (로그인은 앱 셸이 아님) */
+.login-page {
+  padding-top: 1rem;
+}
+
+/* 히어로 헤드라인 + 그라데이션 강조 */
+.hero-headline {
+  margin: 0 0 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.hero-accent {
+  background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 폰 목업 */
+.hero-phone {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 36px;
+  background-color: #1a1a1a;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+.hero-phone img {
+  display: block;
+  width: 260px;
+  height: auto;
+  border-radius: 28px;
+}
+
+/* 로그인 카드 */
+.login-card {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 2.5rem 2.5rem 1.5rem;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  text-align: center;
+}
+
+.login-card-slim {
+  padding: 1.25rem;
+  font-size: 0.875rem;
+}
+
+.login-logo {
+  margin: 0 0 1.5rem;
+  font-size: 2.75rem;
+}
+
+/* 카드 안 로그인 폼 — 자체 테두리/여백 제거 */
+.login-card .login-form {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.login-card .form-input {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* '또는' 구분선 */
+.login-or {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.login-or::before,
+.login-or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.fb-login {
+  display: block;
+  color: var(--ig-blue-strong);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.forgot {
+  margin: 1rem 0 0;
+  font-size: 0.8rem;
+}
+
+.forgot a {
+  color: var(--color-link);
+}
+
+.signup-link {
+  color: var(--ig-blue);
+  font-weight: 600;
+}
+
+.meta-wordmark {
+  margin: 1rem 0;
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+}
+
+.meta-wordmark span {
+  color: #444444;
+  font-weight: 700;
+}
+
+/* 하단 푸터 */
+.login-footer {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 2rem;
+  color: var(--color-text-soft);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.login-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.login-footer a {
+  color: var(--color-text-soft);
+}
+
+.footer-bottom {
+  margin: 0;
+}

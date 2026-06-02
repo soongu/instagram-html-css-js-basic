@@ -13,74 +13,75 @@
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-  <header>
-    <h1><a href="index.html">Instagram</a></h1>
-    <nav>
-      <ul class="nav-menu">
-        <li><a href="index.html">홈</a></li>
-        <li><a href="explore.html">탐색</a></li>
-        <li><a href="feed.html">피드</a></li>
-        <li><a href="profile.html">프로필</a></li>
-      </ul>
-    </nav>
-  </header>
+  <main class="login-page">
+    <div class="login-split">
+      <!-- 왼쪽 히어로 — 헤드라인 + 폰 목업 -->
+      <section class="login-hero">
+        <h2 class="hero-headline">
+          <span class="hero-accent">친한 친구</span>의 일상 속<br>순간들을 확인해 보세요.
+        </h2>
+        <div class="hero-phone">
+          <img src="https://picsum.photos/seed/heroapp/280/560"
+               alt="인스타그램 앱 화면 미리보기"
+               width="260" height="520">
+        </div>
+      </section>
 
-  <main>
-    <section class="auth-section">
-      <h2>친구들의 일상에 오신 것을 환영합니다</h2>
-      <p>
-        로그인하고 <strong>실시간</strong>으로
-        친구들의 사진과 동영상을 확인하세요.
-      </p>
+      <!-- 오른쪽 로그인 패널 -->
+      <section class="login-panel">
+        <div class="login-card">
+          <h1 class="logo login-logo"><a href="index.html">Instagram</a></h1>
 
-      <form class="login-form" action="/login" method="post">
-        <p>
-          <label for="username">사용자 이름</label>
-          <input type="text" id="username" name="username" class="form-input"
-                 placeholder="아이디 또는 이메일"
-                 autocomplete="username"
-                 required minlength="3" maxlength="20">
-        </p>
-        <p>
-          <label for="password">비밀번호</label>
-          <input type="password" id="password" name="password" class="form-input"
-                 placeholder="비밀번호 (8자 이상)"
-                 autocomplete="current-password"
-                 required minlength="8">
-        </p>
-        <p>
-          <label>
-            <input type="checkbox" name="remember" value="yes">
-            로그인 정보 저장
-          </label>
-        </p>
-        <button type="submit" class="btn-login">로그인</button>
-      </form>
+          <form class="login-form" action="/login" method="post">
+            <p>
+              <label class="sr-only" for="username">사용자 이름</label>
+              <input type="text" id="username" name="username" class="form-input"
+                     placeholder="휴대폰 번호, 사용자 이름 또는 이메일"
+                     autocomplete="username"
+                     required minlength="3" maxlength="30">
+            </p>
+            <p>
+              <label class="sr-only" for="password">비밀번호</label>
+              <input type="password" id="password" name="password" class="form-input"
+                     placeholder="비밀번호"
+                     autocomplete="current-password"
+                     required minlength="8">
+            </p>
+            <button type="submit" class="btn-login">로그인</button>
+          </form>
 
-      <p>
-        <a href="#reset-password">비밀번호를 잊으셨나요?</a>
-      </p>
-    </section>
+          <div class="login-or"><span>또는</span></div>
 
-    <hr>
+          <a class="fb-login" href="#facebook">Facebook으로 로그인</a>
+          <p class="forgot"><a href="#reset-password">비밀번호를 잊으셨나요?</a></p>
+        </div>
 
-    <section>
-      <p>계정이 없으신가요? <strong><a href="signup.html">가입하기</a></strong></p>
-      <p>가입은 <mark>30초</mark>면 충분합니다. <em>지금 바로</em> 시작해보세요.</p>
-    </section>
+        <div class="login-card login-card-slim">
+          <p>계정이 없으신가요? <a class="signup-link" href="signup.html">가입하기</a></p>
+        </div>
+
+        <p class="meta-wordmark">from <span>Meta</span></p>
+      </section>
+    </div>
+
+    <!-- 하단 푸터 -->
+    <footer class="login-footer">
+      <nav aria-label="사이트 정보">
+        <ul>
+          <li><a href="#meta">Meta</a></li>
+          <li><a href="about.html">소개</a></li>
+          <li><a href="#blog">블로그</a></li>
+          <li><a href="#jobs">채용 정보</a></li>
+          <li><a href="help.html">도움말</a></li>
+          <li><a href="https://github.com/instagram-clone" target="_blank" rel="noopener noreferrer">API</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="terms.html">약관</a></li>
+          <li><a href="#locations">위치</a></li>
+          <li><a href="#meta-verified">Meta Verified</a></li>
+        </ul>
+      </nav>
+      <p class="footer-bottom">한국어 &nbsp;&middot;&nbsp; &copy; 2026 Instagram Clone Project</p>
+    </footer>
   </main>
-
-  <footer>
-    <nav>
-      <ul>
-        <li><a href="about.html">소개</a></li>
-        <li><a href="help.html">고객센터</a></li>
-        <li><a href="privacy.html">개인정보처리방침</a></li>
-        <li><a href="terms.html">약관</a></li>
-        <li><a href="https://github.com/instagram-clone" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-      </ul>
-    </nav>
-    <p>&copy; 2026 Instagram Clone Project</p>
-  </footer>
 </body>
 </html>
