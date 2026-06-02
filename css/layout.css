@@ -119,3 +119,70 @@ main > h2 {
   padding: 0;
   list-style: none;
 }
+
+/* ===== 프로필 게시물 3열 격자 (CSS Grid) ===== */
+/* 가로·세로를 동시에 맞추는 2차원 배치 — Flexbox로는 빠듯했던 격자 */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+/* 격자 칸 안의 사진은 칸 너비를 꽉 채우기 */
+.post-grid figure {
+  margin: 0;
+}
+
+.post-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.post-grid figcaption {
+  padding: 0.25rem;
+  color: #8e8e8e;
+  font-size: 0.8rem;
+}
+
+/* ===== 프로필 헤더 — 이름으로 영역 배치 (grid-template-areas) ===== */
+/* 왼쪽 아바타 한 칸, 오른쪽에 이름·통계·소개를 세 줄로 쌓는다 */
+.profile-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "avatar name"
+    "avatar stats"
+    "avatar bio";
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+}
+
+.profile-avatar {
+  grid-area: avatar;
+  border-radius: 50%;
+}
+
+.profile-name {
+  grid-area: name;
+  margin: 0;
+}
+
+.profile-stats {
+  grid-area: stats;
+}
+
+.profile-bio {
+  grid-area: bio;
+  margin: 0;
+}
+
+/* ===== 프로필 통계 — 한 줄 정렬은 Flexbox (Grid + Flexbox 조합) ===== */
+/* 큰 배치는 Grid가, 칸 안의 한 줄 나열은 Flexbox가 맡는다 */
+.profile-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

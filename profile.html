@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instagram - 프로필</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
   <header>
     <h1><a href="index.html">Instagram</a></h1>
     <nav>
-      <ul>
+      <ul class="nav-menu">
         <li><a href="index.html">홈</a></li>
         <li><a href="explore.html">탐색</a></li>
         <li><a href="feed.html">피드</a></li>
@@ -19,13 +22,18 @@
   </header>
 
   <main>
-    <section>
-      <img src="https://picsum.photos/seed/avatar1/150/150"
+    <section class="profile-header">
+      <img class="profile-avatar"
+           src="https://picsum.photos/seed/avatar1/150/150"
            alt="홍순구님의 프로필 사진"
            width="150" height="150">
-      <h2>홍순구</h2>
-      <p>@hong_tutor</p>
-      <p>풀스택 개발자 / 강의 진행 중</p>
+      <h2 class="profile-name">홍순구</h2>
+      <ul class="profile-stats">
+        <li><strong>42</strong> 게시물</li>
+        <li><strong>8,500</strong> 팔로워</li>
+        <li><strong>312</strong> 팔로잉</li>
+      </ul>
+      <p class="profile-bio">@hong_tutor · 풀스택 개발자 / 강의 진행 중</p>
     </section>
 
     <hr>
@@ -118,29 +126,79 @@
     <section>
       <h3>내 게시물</h3>
 
-      <figure>
-        <img src="https://picsum.photos/seed/myinsta1/300/300"
-             alt="새벽 작업실 책상 위 키보드와 듀얼 모니터"
-             width="300" height="300"
-             loading="lazy">
-        <figcaption>오늘의 작업실 #coding #devlife</figcaption>
-      </figure>
+      <div class="post-grid">
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta1/300/300"
+               alt="새벽 작업실 책상 위 키보드와 듀얼 모니터"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>오늘의 작업실 #coding</figcaption>
+        </figure>
 
-      <figure>
-        <img src="https://picsum.photos/seed/myinsta2/300/300"
-             alt="강의장 화이트보드에 그려진 시스템 아키텍처 도식"
-             width="300" height="300"
-             loading="lazy">
-        <figcaption>오늘의 강의 화이트보드 #teaching</figcaption>
-      </figure>
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta2/300/300"
+               alt="강의장 화이트보드에 그려진 시스템 아키텍처 도식"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>오늘의 강의 #teaching</figcaption>
+        </figure>
 
-      <figure>
-        <img src="https://picsum.photos/seed/myinsta3/300/300"
-             alt="저녁 노을이 물든 서울 한강 풍경"
-             width="300" height="300"
-             loading="lazy">
-        <figcaption>퇴근길 한강 #seoul #sunset</figcaption>
-      </figure>
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta3/300/300"
+               alt="저녁 노을이 물든 서울 한강 풍경"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>퇴근길 한강 #sunset</figcaption>
+        </figure>
+
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta4/300/300"
+               alt="책상 위에 놓인 커피와 노트북"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>오전 코딩 한 잔 #coffee</figcaption>
+        </figure>
+
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta5/300/300"
+               alt="개발 서적이 쌓인 책장"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>이번 달 읽을 책 #booklist</figcaption>
+        </figure>
+
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta6/300/300"
+               alt="동료들과 함께한 팀 점심 식사"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>팀 점심 #foodie</figcaption>
+        </figure>
+
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta7/300/300"
+               alt="해질녘 산책로를 달리는 러닝 트랙"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>저녁 러닝 #running</figcaption>
+        </figure>
+
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta8/300/300"
+               alt="창밖으로 보이는 도시 야경"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>야근 뷰 #nightview</figcaption>
+        </figure>
+
+        <figure>
+          <img src="https://picsum.photos/seed/myinsta9/300/300"
+               alt="주말 등산길에서 바라본 산 정상 풍경"
+               width="300" height="300"
+               loading="lazy">
+          <figcaption>주말 등산 #mountain</figcaption>
+        </figure>
+      </div>
     </section>
   </main>
 
