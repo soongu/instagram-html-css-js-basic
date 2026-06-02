@@ -432,8 +432,10 @@ article audio {
   font-size: 2.75rem;
 }
 
-/* 카드 안 로그인 폼 — 자체 테두리/여백 제거 */
+/* 카드 안 로그인 폼 — 자체 테두리/여백 제거 + 세로 컬럼으로 폭 통일 */
 .login-card .login-form {
+  display: flex;
+  flex-direction: column;
   max-width: none;
   margin: 0;
   padding: 0;
@@ -441,10 +443,21 @@ article audio {
   background: none;
 }
 
+/* 입력칸을 감싼 <p>의 기본 여백 제거 (좌우 정렬 어긋남 방지) */
+.login-card .login-form p {
+  margin: 0;
+}
+
 .login-card .form-input {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  display: block;
+  width: 100%;
+  margin: 0 0 0.5rem;
   font-size: 0.85rem;
+}
+
+.login-card .btn-login {
+  width: 100%;
+  margin-top: 0.25rem;
 }
 
 /* '또는' 구분선 */
