@@ -23,6 +23,11 @@
   padding: 1.5rem 0.75rem 1.25rem;
 }
 
+/* 로고 링크는 .sidebar a(1rem)에 눌리지 않게 필기체 크기 복원 */
+.sidebar .sidebar-logo a {
+  font-size: 1.75rem;
+}
+
 /* 좁은 레일에서만 보이는 카메라 마크는 기본 숨김 */
 .sidebar-logo .logo-mark {
   display: none;
