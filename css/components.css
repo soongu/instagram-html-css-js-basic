@@ -1,0 +1,96 @@
+/* instagram-clone-frontend/css/components.css */
+
+/* ===== 게시물 카드 셸 ===== */
+article {
+  max-width: 32rem;
+  margin: 1rem auto;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+/* 사진·영상은 카드 너비를 꽉 채우기 */
+article figure {
+  margin: 0;
+}
+
+article figure img,
+article figure video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+article figcaption,
+.post-header,
+.post-actions,
+.tag-list,
+.comment-form {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* ===== 게시물 헤더 — 아바타·작성자 ===== */
+.post-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.post-author {
+  font-size: 0.95rem;
+}
+
+.post-more {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* ===== 액션 바 아이콘 버튼 ===== */
+.icon-btn {
+  border: none;
+  background: none;
+  padding: 0.25rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* ===== 해시태그 칩 ===== */
+.tag-list a {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background-color: #efefef;
+  color: #00376b;
+  font-size: 0.85rem;
+}
+
+/* ===== 댓글 폼 입력칸·버튼 ===== */
+.comment-form {
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.comment-form label {
+  color: #8e8e8e;
+  font-size: 0.9rem;
+}
+
+.comment-form textarea {
+  padding: 0.5rem;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  resize: none;
+  font-family: inherit;
+}
+
+.comment-form button {
+  border: none;
+  background: none;
+  color: #0095f6;
+  font-weight: bold;
+  cursor: pointer;
+}

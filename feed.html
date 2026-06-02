@@ -6,6 +6,7 @@
   <title>Instagram - 피드</title>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
   <header>
@@ -24,22 +25,43 @@
     <h2>피드</h2>
 
     <article>
+      <header class="post-header">
+        <img class="post-avatar" src="https://picsum.photos/seed/avatar1/64/64"
+             alt="jaehoon 프로필 사진" width="32" height="32">
+        <strong class="post-author">jaehoon</strong>
+        <button type="button" class="post-more" popovertarget="postMenu"
+                aria-label="더보기">⋯</button>
+      </header>
+
       <figure class="post-photo">
         <span class="post-badge">NEW</span>
         <img src="https://picsum.photos/seed/insta1/600/600"
              alt="석양이 지는 제주도 협재 해변 — 하늘이 주황빛으로 물들었다"
              width="600" height="600">
-        <figcaption>오늘의 일상 — 제주도 협재 해변 #sunset #travel</figcaption>
+        <figcaption>오늘의 일상 — 제주도 협재 해변</figcaption>
       </figure>
 
-      <p>
-        <button type="button" popovertarget="postMenu">⋯ 더보기</button>
-        <button type="button" command="show-modal" commandfor="shareDialog">공유</button>
-      </p>
+      <div class="post-actions">
+        <button type="button" class="icon-btn" aria-label="좋아요">♥</button>
+        <button type="button" class="icon-btn" aria-label="댓글">💬</button>
+        <button type="button" class="icon-btn"
+                command="show-modal" commandfor="shareDialog" aria-label="공유">↗</button>
+        <button type="button" class="icon-btn icon-btn-save" aria-label="저장">🔖</button>
+      </div>
 
-      <form action="/comments" method="post">
-        <label for="comment-1">댓글 달기</label>
-        <textarea id="comment-1" name="comment" rows="2"
+      <ul class="tag-list">
+        <li><a href="#sunset">#sunset</a></li>
+        <li><a href="#travel">#travel</a></li>
+        <li><a href="#제주도">#제주도</a></li>
+        <li><a href="#협재해변">#협재해변</a></li>
+        <li><a href="#노을맛집">#노을맛집</a></li>
+        <li><a href="#여행스타그램">#여행스타그램</a></li>
+        <li><a href="#감성사진">#감성사진</a></li>
+      </ul>
+
+      <form class="comment-form" action="/comments" method="post">
+        <label for="comment-1">댓글</label>
+        <textarea id="comment-1" name="comment" rows="1"
                   placeholder="댓글을 입력하세요..."
                   maxlength="200" required></textarea>
         <button type="submit">게시</button>
