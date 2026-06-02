@@ -110,22 +110,39 @@
   }
 }
 
-/* ===== 피드 카드 — 모바일에선 화면 끝까지(full-bleed) ===== */
-/* 폰에선 좌우 여백·둥근 모서리를 없애 꽉 차게 (실제 인스타 느낌) */
+/* ===== 피드 게시물 — 모바일에선 사진을 화면 끝까지(full-bleed) ===== */
+/* 폰에선 사진이 좌우 끝까지 꽉 차게 (실제 인스타 느낌) */
 article {
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
-  border-radius: 0;
 }
 
-/* 태블릿 이상 — 카드 틀 복원 (가운데 정렬 + 둥근 모서리) */
+/* 폰에선 사진은 끝까지 가되, 글(메타)은 가장자리에서 살짝 띄운다 */
+@media (max-width: 599px) {
+  .post-header,
+  .post-actions,
+  .tag-list,
+  .comment-form,
+  .post-likes,
+  .post-caption,
+  .post-comments {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  article audio {
+    width: calc(100% - 1.5rem);
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+}
+
+/* 태블릿 이상 — 한 컬럼 폭으로 가운데 정렬 (메타는 사진과 딱 맞음) */
 @media (min-width: 600px) {
   article {
     max-width: var(--feed-w);
     margin-left: auto;
     margin-right: auto;
-    border-radius: var(--radius-md);
   }
 }
 

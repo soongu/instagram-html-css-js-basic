@@ -1,11 +1,9 @@
 /* instagram-clone-frontend/css/components.css */
 
-/* ===== 게시물 카드 셸 ===== */
+/* ===== 게시물 — 테두리 없이 흰 배경 위에 사진 + 메타 ===== */
 article {
   max-width: var(--feed-w);
-  margin: 0 auto 1.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  margin: 0 auto 1rem;
   background-color: var(--color-surface);
 }
 
@@ -21,24 +19,11 @@ article figure video {
   display: block;
 }
 
-/* 오디오 플레이어는 좌우 여백 안쪽에 */
+/* 오디오 플레이어 */
 article audio {
   display: block;
-  width: calc(100% - 2rem);
-  margin: 0.5rem 1rem;
-}
-
-/* 본문 좌우 여백을 한 번에 — 사진만 가장자리까지, 나머지는 1rem 안쪽 */
-article figcaption,
-.post-header,
-.post-actions,
-.tag-list,
-.comment-form,
-.post-likes,
-.post-caption,
-.post-comments {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  width: 100%;
+  margin: 0.5rem 0;
 }
 
 /* ===== 게시물 헤더 — 아바타·작성자·시간·더보기 ===== */
@@ -177,22 +162,22 @@ article figcaption,
 /* ===== 스토리 링 — 무지개 테두리 안에 동그란 아바타 ===== */
 .story-ring {
   display: inline-block;
-  padding: 2px;
+  padding: 3px;
   border-radius: 50%;
   background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
 }
 
 .story-avatar {
   display: block;
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  border: 2px solid var(--color-surface);
+  border: 3px solid var(--color-surface);
   object-fit: cover;
 }
 
 .story-name {
-  max-width: 64px;
+  max-width: 76px;
   overflow: hidden;
   font-size: 0.75rem;
   text-overflow: ellipsis;
