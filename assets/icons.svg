@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <!--
+    instagram-clone-frontend/assets/icons.svg
+    라인 아이콘 스프라이트 — <use href="assets/icons.svg#ico-이름">로 불러 쓴다.
+    모든 아이콘은 24x24 기준, stroke="currentColor"라서 글자색(color)을 따라 색이 바뀐다.
+  -->
+
+  <!-- 홈 -->
+  <symbol id="ico-home" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 10.5 12 3l9 7.5" />
+    <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5" />
+  </symbol>
+
+  <!-- 검색 (돋보기) -->
+  <symbol id="ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10.5" cy="10.5" r="7" />
+    <path d="m20 20-4.5-4.5" />
+  </symbol>
+
+  <!-- 탐색 (나침반) -->
+  <symbol id="ico-explore" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9.5" />
+    <path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" />
+    <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+  </symbol>
+
+  <!-- 릴스 (클래퍼보드) -->
+  <symbol id="ico-reels" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="4" />
+    <path d="M3 8h18M8.5 3l2.5 5M13.5 3l2.5 5" />
+    <path d="m10.5 11.5 4 2.5-4 2.5Z" />
+  </symbol>
+
+  <!-- 메시지 (DM 종이비행기 윤곽) -->
+  <symbol id="ico-message" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 4 3 10.5l7 2.5 2.5 7L21 4Z" />
+    <path d="M10 13 21 4" />
+  </symbol>
+
+  <!-- 하트 (좋아요 / 알림) -->
+  <symbol id="ico-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20s-7-4.6-9.3-9.2C1.2 7.9 2.6 4.8 5.7 4.5c2-.2 3.4.9 4.3 2.2.9-1.3 2.3-2.4 4.3-2.2 3.1.3 4.5 3.4 3 6.3C19 15.4 12 20 12 20Z" />
+  </symbol>
+
+  <!-- 하트 (채워진 — 좋아요 활성) -->
+  <symbol id="ico-heart-fill" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M12 20.5s-7.5-4.9-9.8-9.7C.8 7.6 2.3 4.3 5.6 4c2.2-.2 3.7 1 4.7 2.4l.7 1 .7-1C12.7 5 14.2 3.8 16.4 4c3.3.3 4.8 3.6 3.4 6.8C17.5 15.6 12 20.5 12 20.5Z" />
+  </symbol>
+
+  <!-- 댓글 (말풍선) -->
+  <symbol id="ico-comment" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.8A8.5 8.5 0 1 1 21 11.5Z" />
+  </symbol>
+
+  <!-- 공유 (종이비행기) -->
+  <symbol id="ico-share" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 4 3 10.5l7 2.5 2.5 7L21 4Z" />
+    <path d="M10 13 21 4" />
+  </symbol>
+
+  <!-- 저장 (북마크) -->
+  <symbol id="ico-save" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1Z" />
+  </symbol>
+
+  <!-- 만들기 (네모 안 플러스) -->
+  <symbol id="ico-create" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="4" />
+    <path d="M12 8v8M8 12h8" />
+  </symbol>
+
+  <!-- 대시보드 (막대 그래프) -->
+  <symbol id="ico-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 21V11M12 21V4M19 21v-6" />
+  </symbol>
+
+  <!-- 더 보기 (메뉴) -->
+  <symbol id="ico-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 6h16M4 12h16M4 18h16" />
+  </symbol>
+
+  <!-- 더보기 점 3개 (게시물 ⋯) -->
+  <symbol id="ico-dots" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <circle cx="5" cy="12" r="1.6" />
+    <circle cx="12" cy="12" r="1.6" />
+    <circle cx="19" cy="12" r="1.6" />
+  </symbol>
+
+  <!-- 프로필 (사람) -->
+  <symbol id="ico-profile" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6" />
+  </symbol>
+
+  <!-- 격자 (게시물 탭) -->
+  <symbol id="ico-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="1" />
+    <path d="M9 3v18M15 3v18M3 9h18M3 15h18" />
+  </symbol>
+
+  <!-- 태그됨 (네모 안 사람) -->
+  <symbol id="ico-tagged" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+    <circle cx="12" cy="10" r="2.5" />
+    <path d="M7.5 18c0-2.2 2-3.5 4.5-3.5s4.5 1.3 4.5 3.5" />
+  </symbol>
+
+  <!-- 설정 (톱니) -->
+  <symbol id="ico-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 13c.04-.3.1-.66.1-1s-.06-.7-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1l-.4-2.6h-4l-.4 2.6c-.6.25-1.2.6-1.7 1l-2.3-1-2 3.4 2 1.5c-.04.3-.1.66-.1 1s.06.7.1 1l-2 1.5 2 3.4 2.3-1c.5.4 1.1.75 1.7 1l.4 2.6h4l.4-2.6c.6-.25 1.2-.6 1.7-1l2.3 1 2-3.4-2-1.5Z" />
+  </symbol>
+
+  <!-- 아래 화살표 (chevron) -->
+  <symbol id="ico-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m6 9 6 6 6-6" />
+  </symbol>
+</svg>

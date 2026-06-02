@@ -1,5 +1,38 @@
 /* instagram-clone-frontend/css/base.css */
 
+/* ===== 디자인 토큰 — 색·간격·둥근 모서리를 한곳에서 관리 ===== */
+:root {
+  /* 색 */
+  --ig-blue: #0095f6;
+  --ig-blue-strong: #1877f2;
+  --ig-red: #ed4956;
+  --color-text: #262626;
+  --color-text-soft: #8e8e8e;
+  --color-link: #00376b;
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-border: #dbdbdb;
+  --color-divider: #efefef;
+  --color-hover: #f2f2f2;
+
+  /* 둥근 모서리 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* 레이아웃 치수 */
+  --sidebar-w: 244px;       /* 데스크톱 사이드바(라벨 포함) */
+  --sidebar-w-narrow: 72px; /* 좁은 화면 아이콘 전용 레일 */
+  --feed-w: 470px;          /* 가운데 피드 한 컬럼 폭 */
+  --aside-w: 320px;         /* 오른쪽 추천 사이드바 폭 */
+  --content-max: 935px;     /* 프로필 등 넓은 본문 폭 */
+
+  /* 글꼴 */
+  --font-base: "Apple SD Gothic Neo", "Segoe UI", system-ui, sans-serif;
+  --font-logo: "Grand Hotel", "Apple SD Gothic Neo", cursive;
+}
+
 /* ===== 모든 요소를 border-box로 — 너비 계산을 직관적으로 ===== */
 * {
   box-sizing: border-box;
@@ -8,31 +41,42 @@
 /* ===== 페이지 바탕 (태그 선택자 + 타이포그래피) ===== */
 body {
   margin: 0;
-  background-color: #fafafa;
-  color: #262626;
-  font-family: "Apple SD Gothic Neo", "Segoe UI", sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-  color: #00376b;
+  color: var(--color-link);
   text-decoration: none;
+}
+
+/* ===== 인스타그램 필기체 로고(워드마크) ===== */
+.logo {
+  margin: 0;
+  font-family: var(--font-logo);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--color-text);
+  letter-spacing: 0.5px;
+}
+
+.logo a {
+  color: inherit;
 }
 
 /* ===== 헤더 네비게이션 (관계 선택자) ===== */
 header nav a {
-  color: #262626;
-  font-weight: bold;
-}
-
-.nav-menu > li {
-  padding: 0.5rem 0.75rem;
-  background-color: #efefef;
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 h2 + p {
-  color: #8e8e8e;
+  color: var(--color-text-soft);
   font-size: 0.9rem;
 }
 
@@ -42,13 +86,13 @@ h2 + p {
   max-width: 22rem;
   margin: 1.5rem auto;
   padding: 1.5rem;
-  border: 1px solid #dbdbdb;
-  border-radius: 8px;
-  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
 
   & label {
     margin-right: 0.5rem;
-    color: #8e8e8e;
+    color: var(--color-text-soft);
     font-weight: bold;
   }
 }
@@ -58,13 +102,9 @@ h2 + p {
   width: 100%;
   margin-top: 0.25rem;
   padding: 0.625rem;
-  border: 1px solid #dbdbdb;
-  border-radius: 4px;
-  background-color: #fafafa;
-}
-
-#username {
-  background-color: #efefef;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg);
 }
 
 /* ===== :has() — 체크박스가 켜진 줄 강조 ===== */
@@ -76,11 +116,20 @@ h2 + p {
 .btn-login {
   width: 100%;
   margin-top: 0.5rem;
-  padding: 0.625rem;
+  padding: 0.5rem;
   border: none;
-  border-radius: 8px;
-  background-color: #0095f6;
+  border-radius: var(--radius-md);
+  background-color: var(--ig-blue);
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===== 공통 아이콘 — <use href="assets/icons.svg#...">로 불러 쓴다 ===== */
+.ico {
+  width: 24px;
+  height: 24px;
+  display: block;
+  color: var(--color-text);
 }
