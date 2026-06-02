@@ -1,0 +1,50 @@
+/* instagram-clone-frontend/css/layout.css */
+
+/* ===== 네비게이션 메뉴 가로 배치 (display: inline-block) ===== */
+.nav-menu > li {
+  display: inline-block;
+}
+
+/* ===== 상단 네비게이션 바 고정 (position: fixed) ===== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dbdbdb;
+  z-index: 100;
+}
+
+/* 고정 헤더가 본문 첫 줄을 가리지 않도록 그만큼 아래로 밀기 */
+main {
+  padding-top: 5rem;
+}
+
+/* ===== 게시물 사진 위 뱃지 오버레이 (position: absolute) ===== */
+.post-photo {
+  position: relative;
+}
+
+.post-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: #0095f6;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* ===== 섹션 제목이 스크롤하다 멈추기 (position: sticky) ===== */
+main > h2 {
+  position: sticky;
+  top: 4rem;
+  margin: 0;
+  padding: 0.5rem 0;
+  background-color: #fafafa;
+}
