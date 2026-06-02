@@ -108,3 +108,74 @@ if (likeCount >= POPULAR_THRESHOLD) {
 } else {
   console.log("좋아요 " + likeCount + "개");
 }
+
+
+// ============================================================
+// C-2 함수 기초 — 반복 코드를 이름 붙여 재사용하기
+// ============================================================
+
+// ===== Step 1. 함수 선언식 — 좋아요 안내를 한 번만 정의 =====
+// C-1에서는 게시물마다 console.log 를 복사했어요.
+// 이제 한 번만 만들고, 이름으로 불러 씁니다.
+function announceLike(count) {
+  console.log("좋아요 " + count + "개입니다");
+}
+announceLike(42);   // 좋아요 42개입니다
+announceLike(8);    // 좋아요 8개입니다
+announceLike(150);  // 좋아요 150개입니다
+
+// ===== Step 2. 함수 표현식 vs 화살표 함수 =====
+// 같은 함수를 세 가지 방법으로 만들 수 있어요.
+const announceLikeExpr = function (count) {  // 함수 표현식: 변수에 함수를 담기
+  console.log("좋아요 " + count + "개입니다");
+};
+const announceLikeArrow = (count) => {       // 화살표 함수: function 글자를 => 로
+  console.log("좋아요 " + count + "개입니다");
+};
+announceLikeExpr(42);
+announceLikeArrow(42);
+
+// 한 줄짜리 화살표 함수는 중괄호와 return 을 생략할 수 있어요.
+const doubleLikes = (n) => n * 2;
+console.log(doubleLikes(21));  // 42
+
+// ===== Step 3. 매개변수와 반환값(return) — 숫자를 보기 좋게 =====
+// 입력(count)을 받아 결과를 return 으로 돌려줍니다.
+function formatLikeCount(count) {
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + "천";  // 1240 → "1.2천"
+  }
+  return count + "개";
+}
+console.log(formatLikeCount(8));     // 8개
+console.log(formatLikeCount(1240));  // 1.2천
+
+// ===== Step 4. 매개변수 기본값 — 값을 안 넘기면 기본값 사용 =====
+function greet(name = "게스트") {
+  console.log(name + "님, 환영합니다");
+}
+greet("hong_tutor");  // hong_tutor님, 환영합니다
+greet();              // 게스트님, 환영합니다 (값을 안 넘기면 기본값)
+
+// ===== Step 5. rest parameter(...) — 개수가 정해지지 않은 인자 =====
+// 인자를 몇 개를 넘기든 postIds 라는 하나의 묶음으로 받아요.
+function likeMultiplePosts(...postIds) {
+  console.log(postIds.length + "개 게시물에 좋아요를 눌렀어요");
+  for (const id of postIds) {
+    console.log("게시물 " + id + " 좋아요 완료");
+  }
+}
+likeMultiplePosts(1, 2, 3);  // 3개 게시물에...
+likeMultiplePosts(7);        // 1개 게시물에...
+
+// ===== Step 6. 재사용 유틸 함수 모음 (마무리 실습) =====
+// 좋아요 토글 + 숫자 포맷 함수를 한 묶음으로 정리했어요.
+function toggleLike(liked) {
+  return !liked;  // 눌렀으면 취소, 안 눌렀으면 누름
+}
+
+let myLiked = false;
+myLiked = toggleLike(myLiked);  // true
+console.log("좋아요 상태: " + myLiked + " / 표시: " + formatLikeCount(1241));
+myLiked = toggleLike(myLiked);  // false
+console.log("좋아요 상태: " + myLiked);
