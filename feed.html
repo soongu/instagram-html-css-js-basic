@@ -108,21 +108,14 @@
             </button>
           </header>
 
-          <figure class="post-photo">
-            <span class="post-badge">NEW</span>
-            <picture>
-              <!-- 큰 화면(600px↑): 가로로 넓은 풍경 컷 -->
-              <source media="(min-width: 600px)"
-                      srcset="https://picsum.photos/seed/insta1wide/800/450">
-              <!-- 기본(폰): 정사각형 + 해상도별 3종 -->
-              <img src="https://picsum.photos/seed/insta1/600/600"
-                   srcset="https://picsum.photos/seed/insta1/400/400 400w,
-                           https://picsum.photos/seed/insta1/600/600 600w,
-                           https://picsum.photos/seed/insta1/800/800 800w"
-                   sizes="(min-width: 600px) 32rem, 100vw"
-                   alt="석양이 지는 제주도 협재 해변 — 하늘이 주황빛으로 물들었다"
-                   width="600" height="600">
-            </picture>
+          <figure>
+            <img src="https://picsum.photos/seed/insta1/600/600"
+                 srcset="https://picsum.photos/seed/insta1/400/400 400w,
+                         https://picsum.photos/seed/insta1/600/600 600w,
+                         https://picsum.photos/seed/insta1/800/800 800w"
+                 sizes="(min-width: 600px) 470px, 100vw"
+                 alt="석양이 지는 제주도 협재 해변 — 하늘이 주황빛으로 물들었다"
+                 width="600" height="600">
           </figure>
 
           <div class="post-actions">
@@ -138,27 +131,8 @@
           </div>
 
           <p class="post-likes">좋아요 <strong>1,240</strong>개</p>
-          <p class="post-caption"><strong>jaehoon</strong>오늘의 일상 — 제주도 협재 해변. 노을이 정말 예술이었어요 <span class="more">더 보기</span></p>
-
-          <ul class="tag-list">
-            <li><a href="#sunset">#sunset</a></li>
-            <li><a href="#travel">#travel</a></li>
-            <li><a href="#제주도">#제주도</a></li>
-            <li><a href="#협재해변">#협재해변</a></li>
-            <li><a href="#노을맛집">#노을맛집</a></li>
-            <li><a href="#여행스타그램">#여행스타그램</a></li>
-            <li><a href="#감성사진">#감성사진</a></li>
-          </ul>
-
+          <p class="post-caption"><strong>jaehoon</strong>오늘의 일상 — 제주도 협재 해변. 노을이 정말 예술이었어요 #sunset #travel #제주도 #협재해변 <span class="more">더 보기</span></p>
           <p class="post-comments"><a href="#comments">댓글 84개 모두 보기</a></p>
-
-          <form class="comment-form" action="/comments" method="post">
-            <label for="comment-1">댓글</label>
-            <textarea id="comment-1" name="comment" rows="1"
-                      placeholder="댓글 달기..."
-                      maxlength="200" required></textarea>
-            <button type="submit">게시</button>
-          </form>
         </article>
 
         <!-- 게시물 2 -->
