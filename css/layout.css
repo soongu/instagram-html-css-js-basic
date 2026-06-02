@@ -30,6 +30,11 @@ main {
   padding-top: 6.5rem;
 }
 
+/* 고정 바를 슬림하게 — h1 로고의 기본 위아래 여백 제거 */
+body > header h1 {
+  margin: 0;
+}
+
 /* ===== 게시물 사진 위 뱃지 오버레이 (position: absolute) ===== */
 .post-photo {
   position: relative;
@@ -120,6 +125,13 @@ main > h2 {
   list-style: none;
 }
 
+/* ===== 프로필 콘텐츠 폭 가두기 — 화면 전체로 퍼지지 않게 ===== */
+/* 카드(article)와 같은 32rem로 가운데 정렬, 페이지마다 본문 폭을 통일 */
+.profile-posts {
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
 /* ===== 프로필 게시물 3열 격자 (CSS Grid) ===== */
 /* 가로·세로를 동시에 맞추는 2차원 배치 — Flexbox로는 빠듯했던 격자 */
 .post-grid {
@@ -156,6 +168,8 @@ main > h2 {
     "avatar bio";
   align-items: center;
   gap: 0.5rem 1.5rem;
+  max-width: 32rem;
+  margin: 2.5rem auto 1.5rem;
 }
 
 .profile-avatar {
