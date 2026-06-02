@@ -1,10 +1,18 @@
 /* instagram-clone-frontend/css/base.css */
 
-/* ===== 페이지 바탕 (태그 선택자) ===== */
+/* ===== 모든 요소를 border-box로 — 너비 계산을 직관적으로 ===== */
+* {
+  box-sizing: border-box;
+}
+
+/* ===== 페이지 바탕 (태그 선택자 + 타이포그래피) ===== */
 body {
+  margin: 0;
   background-color: #fafafa;
   color: #262626;
   font-family: "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 a {
@@ -19,35 +27,60 @@ header nav a {
 }
 
 .nav-menu > li {
+  padding: 0.5rem 0.75rem;
   background-color: #efefef;
 }
 
 h2 + p {
   color: #8e8e8e;
+  font-size: 0.9rem;
 }
 
-/* ===== 로그인 폼 요소 (클래스 / ID 선택자) ===== */
-.btn-login {
-  background-color: #0095f6;
-  color: #ffffff;
-  font-weight: bold;
+/* ===== 로그인 폼 — 박스 모델 + 단위 + 타이포 ===== */
+.login-form {
+  width: 90%;
+  max-width: 22rem;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  background-color: #ffffff;
+
+  & label {
+    margin-right: 0.5rem;
+    color: #8e8e8e;
+    font-weight: bold;
+  }
+}
+
+/* 입력칸 공통 스타일 (form-input 클래스) */
+.form-input {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.625rem;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  background-color: #fafafa;
 }
 
 #username {
   background-color: #efefef;
 }
 
-/* ===== :has() — 체크박스가 켜진 줄의 배경을 강조 ===== */
+/* ===== :has() — 체크박스가 켜진 줄 강조 ===== */
 .login-form p:has(input:checked) {
   background-color: #e7f3ff;
 }
 
-/* ===== 중첩(Nesting)으로 폼 스타일 묶기 ===== */
-.login-form {
-  background-color: #ffffff;
-
-  & label {
-    color: #8e8e8e;
-    font-weight: bold;
-  }
+/* ===== 로그인 버튼 ===== */
+.btn-login {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.625rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #0095f6;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
 }
