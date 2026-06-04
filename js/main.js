@@ -2,6 +2,10 @@
 // C-1 JavaScript 입문 — 콘솔에서 직접 확인하는 연습장
 // 브라우저에서 feed.html 을 열고 DevTools(F12) → Console 탭을 보세요.
 
+// C-5 Step 6~7: 역할별로 나눈 파일을 맨 위에서 불러와요 (import 는 파일 최상단에)
+import { feedPosts } from "./data.js";
+import { formatCard } from "./format.js";
+
 // ===== Step 1. console.log 첫 만남 =====
 console.log("인스타 클론에 생명을 불어넣자!");
 console.log("좋아요", 42, "개");
@@ -487,3 +491,51 @@ const foodCards = feed
   .filter((item) => item.category === "food")
   .map((item) => item.caption + " (맛집)");
 console.log(foodCards);  // ["오늘의 맛집 발견 (맛집)", "집밥 한 끼 (맛집)"]
+
+// ===== C-5 Step 1. 템플릿 리터럴 — 백틱과 ${} =====
+// C-4 에서 카드 문자열을 + 로 이어 붙였죠. 백틱(`)이면 훨씬 깔끔해요.
+const nickname = "minji";
+const heartCount = 120;
+console.log(nickname + " — 좋아요 " + heartCount + "개");   // C-4 방식 (+ 연결)
+console.log(`${nickname} — 좋아요 ${heartCount}개`);         // C-5 방식 (백틱 + ${})
+
+// ${ } 안에는 변수뿐 아니라 식(표현식)도 넣을 수 있어요
+console.log(`이건 ${heartCount >= 100 ? "인기" : "일반"} 게시물이에요`);
+console.log(`좋아요를 누르면 ${heartCount + 1}개가 돼요`);
+
+// ===== C-5 Step 2. 여러 줄 문자열 — 줄바꿈을 그대로 =====
+// 백틱은 줄바꿈도 그대로 담아요. 중간에 + "\n" + 안 써도 돼요.
+const card = `작성자: ${nickname}
+내용: 제주 여행 다녀왔어요
+좋아요: ${heartCount}개`;
+console.log(card);
+
+// 따옴표(' ")도 백틱 안에서는 그냥 써요 (이스케이프 불필요)
+console.log(`그녀는 "정말 예쁘다"고 말했어요`);
+
+// ===== C-5 Step 3. 옵셔널 체이닝 ?. — 없는 길을 안전하게 =====
+// 게시물마다 작성자 정보가 있을 수도, 없을 수도 있어요.
+const postA = { caption: "제주 여행", author: { name: "minji" } };
+const postB = { caption: "평범한 일상" };   // author 가 아예 없어요
+
+console.log(postA.author.name);    // "minji"
+// console.log(postB.author.name); // ❌ TypeError! author 가 undefined 라서 .name 에서 터져요
+
+// ?. 를 끼우면, 중간이 없을 때 멈추고 undefined 를 돌려줘요 (에러 없음)
+console.log(postB.author?.name);   // undefined  (터지지 않아요)
+console.log(postA.author?.name);   // "minji"
+
+// ===== C-5 Step 4. Nullish 병합 ?? — 비었을 때만 기본값 =====
+// 왼쪽이 null/undefined 면 오른쪽 기본값을, 아니면 왼쪽 값을 써요.
+console.log(postB.author?.name ?? "익명");   // "익명"  (undefined 라서 기본값)
+console.log(postA.author?.name ?? "익명");   // "minji" (값이 있어서 그대로)
+
+// ?? 와 || 의 결정적 차이 — 좋아요 0 개일 때!
+const zeroLikes = 0;
+console.log(zeroLikes || "없음");   // "없음"  ← 0 을 '비었다'고 오해 (틀림)
+console.log(zeroLikes ?? "없음");   // 0       ← 0 은 멀쩡한 값으로 살림 (맞음)
+
+// ===== C-5 Step 7. 실전 — 세 파일(data·format·main)이 협력 =====
+// feedPosts 는 data.js 에서, formatCard 는 format.js 에서 import 했어요 (맨 위 참고).
+const feedCards = feedPosts.map(formatCard);
+feedCards.forEach((line) => console.log(line));
