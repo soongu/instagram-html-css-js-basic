@@ -179,3 +179,149 @@ myLiked = toggleLike(myLiked);  // true
 console.log("좋아요 상태: " + myLiked + " / 표시: " + formatLikeCount(1241));
 myLiked = toggleLike(myLiked);  // false
 console.log("좋아요 상태: " + myLiked);
+
+
+// ============================================================
+// C-3 함수 어드밴스 — 스코프 · 클로저 · 콜백
+// ============================================================
+
+// ===== Step 1. 스코프 ① 전역 스코프 vs 함수 스코프 =====
+// 전역(global): 함수 밖, 코드 어디서나 보이는 변수
+// 함수 스코프: 함수 { } 안에서 만든 변수는 그 함수 안에서만 보임
+const appName = "인스타 클론";   // 전역 변수
+
+function showAppName() {
+  const greeting = "환영합니다";   // 함수 안에서만 사는 변수
+  console.log(appName + "에 " + greeting);  // 전역 appName 은 안에서도 보임
+}
+showAppName();           // 인스타 클론에 환영합니다
+console.log(appName);    // 인스타 클론 (전역은 함수 밖에서도 보임)
+// console.log(greeting);  // ReferenceError! 함수 안 변수는 밖에서 안 보여요
+
+// ===== Step 2. 스코프 ② 블록 스코프 + 스코프 체인 =====
+// let / const 는 { } 블록 안에서만 살아있어요 (블록 스코프)
+let totalLikes = 0;
+if (totalLikes === 0) {
+  const message = "아직 좋아요가 없어요";  // if 블록 안에서만 보임
+  console.log(message);
+}
+// console.log(message);  // ReferenceError! if 블록 밖에선 안 보여요
+
+// for 의 i 도 블록 스코프 — 루프가 끝나면 사라져요
+for (let i = 1; i <= 3; i++) {
+  console.log(i + "번째 게시물 확인");
+}
+// console.log(i);  // ReferenceError! for 밖에선 i 가 없어요
+
+// 스코프 체인: 안쪽 함수는 자기에게 없는 변수를 바깥에서 찾아 올라가요
+const outerTag = "#daily";
+function printTag() {
+  console.log(outerTag);   // 내 안에 없으면 바깥 스코프에서 찾음
+}
+printTag();  // #daily
+
+// ===== Step 3. 클로저 ① 함수가 자신의 변수를 기억한다 =====
+// 함수 안에서 함수를 만들어 돌려주면, 안쪽 함수는
+// 바깥 함수의 변수를 계속 "기억"해요. 이게 클로저(closure).
+function makeCounter() {
+  let count = 0;            // 바깥 함수의 변수
+  return function () {       // 안쪽 함수를 돌려줌
+    count = count + 1;       // 바깥 count 를 계속 기억하고 더함
+    return count;
+  };
+}
+const counter = makeCounter();
+console.log(counter());  // 1
+console.log(counter());  // 2
+console.log(counter());  // 3  ← count 가 사라지지 않고 기억돼요!
+
+// ===== Step 4. 클로저 ② 활용 — 좋아요 토글 상태 숨기기 =====
+// 좋아요 상태(liked)를 함수 안에 숨겨두고, 부를 때마다 켜짐/꺼짐을 뒤집어요.
+// C-2 의 toggleLike 는 상태를 밖에서 들고 다녔지만, 이번엔 함수가 직접 기억해요.
+function makeLikeToggle() {
+  let liked = false;        // 이 상태는 함수 안에 숨어 있어요
+  return function () {
+    liked = !liked;         // 누를 때마다 반대로 뒤집기
+    return liked;
+  };
+}
+function showLike(state) {
+  if (state) {
+    console.log("켜짐 ❤️");
+  } else {
+    console.log("꺼짐 🤍");
+  }
+}
+const toggle = makeLikeToggle();
+showLike(toggle());  // 켜짐 ❤️
+showLike(toggle());  // 꺼짐 🤍
+showLike(toggle());  // 켜짐 ❤️
+// liked 변수는 함수 밖에서 직접 못 봐요 — 클로저가 안전하게 숨겨줘요
+
+// ===== Step 5. 콜백 ① 함수를 값으로 건네주기 =====
+// 함수도 값이라서, 다른 함수에 인자로 넘길 수 있어요.
+// 넘겨받아 안에서 부르는 함수를 콜백(callback)이라고 해요.
+function sayHi() {
+  console.log("안녕하세요!");
+}
+function runTwice(callback) {   // callback 자리에 함수를 받음
+  callback();                  // 받은 함수를 부름
+  callback();                  // 한 번 더
+}
+runTwice(sayHi);  // 안녕하세요! (두 번)
+
+// 이름 없는 화살표 함수를 그 자리에서 바로 넘겨도 돼요
+runTwice(() => console.log("좋아요 눌렀어요"));
+
+// ===== Step 6. 콜백 ② 배열을 돌며 콜백 실행하기 =====
+// for 루프로 배열을 돌면서, 각 요소마다 콜백을 한 번씩 불러요.
+// (배열 전용 메서드는 다음 시간에 — 지금은 직접 만들어요)
+function forEachItem(items, callback) {
+  for (let i = 0; i < items.length; i++) {
+    callback(items[i]);   // 요소 하나를 콜백에 넘김
+  }
+}
+const tags = ["#여행", "#맛집", "#일상"];
+forEachItem(tags, (tag) => {
+  console.log("태그: " + tag);
+});
+// 콜백만 바꾸면 같은 순회로 다른 일을 할 수 있어요
+forEachItem(tags, (tag) => {
+  console.log(tag + " 의 길이: " + tag.length);
+});
+
+// ===== Step 7. 피드 필터링 함수 — filterPosts (마무리 실습) =====
+// 게시물을 카테고리별로 걸러내요. 각 게시물은 객체로 표현하는데,
+// 객체는 다음 시간에 제대로 배워요. 지금은 "이렇게 생겼다"만 미리보기!
+// post.category 처럼 점(.)으로 객체 안의 값을 꺼내요.
+const posts = [
+  { caption: "제주 여행 다녀왔어요", category: "travel" },
+  { caption: "오늘의 맛집 발견", category: "food" },
+  { caption: "평범한 일상", category: "daily" },
+  { caption: "발리 서핑 도전", category: "travel" },
+  { caption: "집밥 한 끼", category: "food" }
+];
+
+// posts 중 category 가 일치하는 것만 골라, 매칭된 게시물마다 콜백 실행
+function filterPosts(items, category, onMatch) {
+  let matched = 0;                       // 함수 스코프 변수 (몇 개 찾았나)
+  for (let i = 0; i < items.length; i++) {
+    const post = items[i];
+    if (post.category === category) {    // 카테고리가 같은가?
+      matched = matched + 1;
+      onMatch(post);                     // 일치한 게시물을 콜백에 넘김
+    }
+  }
+  return matched;                        // 찾은 개수를 돌려줌
+}
+
+// "여행 게시물만 보여줘" — 콜백으로 출력 방식을 정해요
+const travelCount = filterPosts(posts, "travel", (post) => {
+  console.log("✈️ " + post.caption);
+});
+console.log("여행 게시물 " + travelCount + "개");
+
+// 같은 함수, 콜백만 바꿔서 "맛집"을 다르게 출력해요
+filterPosts(posts, "food", (post) => {
+  console.log("🍜 " + post.caption + " (맛집)");
+});
