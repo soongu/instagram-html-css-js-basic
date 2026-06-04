@@ -325,3 +325,165 @@ console.log("여행 게시물 " + travelCount + "개");
 filterPosts(posts, "food", (post) => {
   console.log("🍜 " + post.caption + " (맛집)");
 });
+
+
+// ============================================================
+// C-4 배열과 객체 — 피드 데이터를 자유자재로 다루기
+// ============================================================
+
+// ===== Step 1. 배열 메서드 ① push · pop · splice · slice =====
+// 배열에 요소를 넣고, 빼고, 잘라내는 기본 도구예요.
+const stories = ["jaehoon", "minji", "seungwoo"];
+
+stories.push("yuna");           // 맨 뒤에 추가 (원본을 바꿈)
+console.log(stories);           // ["jaehoon", "minji", "seungwoo", "yuna"]
+
+const popped = stories.pop();   // 맨 뒤 하나를 빼서 돌려줌 (원본을 바꿈)
+console.log(popped);            // "yuna"
+console.log(stories);           // ["jaehoon", "minji", "seungwoo"]
+
+// splice(시작, 삭제개수, 넣을값) — 중간을 잘라내거나 끼워넣기 (원본을 바꿈)
+stories.splice(1, 1, "dohyun"); // index 1 부터 1개 빼고 그 자리에 "dohyun"
+console.log(stories);           // ["jaehoon", "dohyun", "seungwoo"]
+
+// slice(시작, 끝) — 원본은 그대로 두고 잘라낸 복사본을 돌려줌
+const firstTwo = stories.slice(0, 2);  // index 0 ~ 1
+console.log(firstTwo);          // ["jaehoon", "dohyun"]
+console.log(stories);           // 원본은 그대로 (slice 는 안 건드림)
+
+// ===== Step 2. forEach 와 map — "각각"을 다루는 두 가지 방법 =====
+// C-3 에서 forEachItem 을 직접 만들었죠? 자바스크립트엔 이미 들어 있어요.
+const captions = ["제주 여행", "오늘의 맛집", "평범한 일상"];
+
+// forEach: 각 요소마다 콜백 실행 (결과를 모으지 않음 — 출력 같은 "부작용"용)
+captions.forEach((text) => {
+  console.log("게시물: " + text);
+});
+
+// map: 각 요소를 "변환"해서 새 배열로 모음 (원본은 그대로)
+const lengths = captions.map((text) => text.length);
+console.log(lengths);    // [5, 6, 6]  ← 각 글자 수로 변환된 새 배열
+
+const labels = captions.map((text) => "📷 " + text);
+console.log(labels);     // ["📷 제주 여행", "📷 오늘의 맛집", "📷 평범한 일상"]
+console.log(captions);   // 원본은 그대로 (map 은 새 배열만 만들어요)
+
+// ===== Step 3. filter 와 reduce — 걸러내고 합산하기 =====
+// C-3 의 filterPosts 는 for 루프로 직접 걸렀어요. filter 가 그걸 한 줄로 줄여줘요.
+const likeCounts = [120, 8, 340, 56, 1200];
+
+// filter: 조건이 참인 요소만 모아 새 배열로
+const popular = likeCounts.filter((n) => n >= 100);
+console.log(popular);    // [120, 340, 1200]
+
+// reduce: 배열을 하나의 값으로 "접어" 나가기 (합계·최댓값 등)
+// (누적값 sum, 현재값 n) => 다음 누적값,  0 은 시작값
+const likeSum = likeCounts.reduce((sum, n) => sum + n, 0);
+console.log(likeSum);    // 1724  (0 에서 시작해 하나씩 더함)
+
+// ===== Step 4. 객체 리터럴과 점 표기법 — 관련 데이터를 한 다발로 =====
+// C-3 Step 7 에서 { caption, category } 를 잠깐 봤죠? 이제 제대로 배워요.
+// 객체는 이름표(key)가 붙은 값(value)들의 묶음이에요.
+const post = {
+  id: 1,
+  caption: "제주 여행 다녀왔어요",
+  category: "travel",
+  likeCount: 120
+};
+
+// 점(.) 표기법으로 값을 읽고 바꿔요
+console.log(post.caption);    // "제주 여행 다녀왔어요"
+console.log(post.likeCount);  // 120
+post.likeCount = 121;         // 좋아요 +1 (속성 값 변경)
+console.log(post.likeCount);  // 121
+
+// 없던 속성도 점 표기법으로 새로 추가돼요
+post.isLiked = true;
+console.log(post.isLiked);    // true
+
+// 중괄호 단축 문법: 변수 이름과 key 가 같으면 한 번만 써요 (ES6)
+const author = "minji";
+const postCount = 150;
+const summary = { author, postCount };  // { author: "minji", postCount: 150 }
+console.log(summary);
+
+// ===== Step 5. 구조 분해 할당 — 한 번에 여러 값 꺼내기 =====
+// 객체에서 필요한 속성만 콕 집어 변수로 빼낼 수 있어요.
+const account = { handle: "hong_tutor", fans: 1240, isPublic: true };
+const { handle, fans } = account;   // 속성 이름과 똑같은 변수로 받아요
+console.log(handle, fans);          // hong_tutor 1240
+
+// 기본값: 객체에 없는 속성은 기본값으로 채워요
+const { bio = "소개가 없어요" } = account;
+console.log(bio);                   // 소개가 없어요
+
+// 배열 분해: 위치(순서)대로 받아요
+const topThree = ["jaehoon", "minji", "seungwoo"];
+const [first, second] = topThree;
+console.log(first, second);         // jaehoon minji
+
+// 나머지(...rest): 앞을 빼고 남은 걸 배열로 묶어요
+const [winner, ...runnersUp] = topThree;
+console.log(winner);                // jaehoon
+console.log(runnersUp);             // ["minji", "seungwoo"]
+
+// 함수가 배열을 돌려주면, 그 자리에서 분해로 받을 수 있어요.
+// C-3 클로저를 응용 — 좋아요 수를 함수 안에 숨기고 [읽기, 누르기]를 돌려줘요.
+function makeLikeBox() {
+  let count = 0;
+  const read = () => count;
+  const press = () => {
+    count = count + 1;
+    return count;
+  };
+  return [read, press];             // 배열에 두 함수를 담아 돌려줌
+}
+const [readLikes, pressLike] = makeLikeBox();  // 배열 분해로 한 번에 받기
+pressLike();
+pressLike();
+console.log(readLikes());           // 2  (숨겨진 count 가 기억돼요)
+
+// ===== Step 6. 스프레드 연산자(...) — 펼쳐서 합치기 =====
+// 점 세 개(...)는 배열·객체를 "펼쳐" 새 것을 만들어요. 원본은 안 건드려요.
+const morning = ["jaehoon", "minji"];
+const evening = ["seungwoo", "yuna"];
+const allStories = [...morning, ...evening];  // 두 배열을 펼쳐 합치기
+console.log(allStories);            // ["jaehoon", "minji", "seungwoo", "yuna"]
+
+// 맨 앞에 새 요소를 끼우며 복사 (원본 morning 은 그대로)
+const withNewFirst = ["dohyun", ...morning];
+console.log(withNewFirst);          // ["dohyun", "jaehoon", "minji"]
+
+// 객체도 펼칠 수 있어요 — 복사하면서 일부 속성만 덮어쓰기
+const basePost = { id: 1, caption: "제주 여행", likeCount: 120 };
+const likedPost = { ...basePost, likeCount: 121, isLiked: true };
+console.log(likedPost);             // likeCount 만 121 로 바뀐 새 객체
+console.log(basePost.likeCount);    // 120  ← 원본은 그대로 (불변성)
+
+// ===== Step 7. 실전 — 피드 데이터 렌더링 (filter + map + 구조분해) =====
+// C-3 의 filterPosts 를 객체 배열 + 배열 메서드로 다시 써봐요.
+const feed = [
+  { id: 1, caption: "제주 여행 다녀왔어요", category: "travel", likeCount: 120 },
+  { id: 2, caption: "오늘의 맛집 발견", category: "food", likeCount: 8 },
+  { id: 3, caption: "평범한 일상", category: "daily", likeCount: 56 },
+  { id: 4, caption: "발리 서핑 도전", category: "travel", likeCount: 340 },
+  { id: 5, caption: "집밥 한 끼", category: "food", likeCount: 1200 }
+];
+
+// 1) 여행 게시물만 걸러내기 (filterPosts 의 for 루프가 filter 한 줄로!)
+const travelPosts = feed.filter((item) => item.category === "travel");
+console.log("여행 게시물 " + travelPosts.length + "개");  // 여행 게시물 2개
+
+// 2) 걸러낸 게시물을 화면에 그릴 카드 문자열로 변환 (map + 구조분해)
+//    백틱(``) 문법은 다음 시간에 — 지금은 + 로 이어 붙여요.
+const cards = travelPosts.map(({ caption, likeCount }) => {
+  return caption + " — 좋아요 " + likeCount + "개";
+});
+console.log(cards);
+// ["제주 여행 다녀왔어요 — 좋아요 120개", "발리 서핑 도전 — 좋아요 340개"]
+
+// 3) filter → map 을 한 번에 연결(chain)
+const foodCards = feed
+  .filter((item) => item.category === "food")
+  .map((item) => item.caption + " (맛집)");
+console.log(foodCards);  // ["오늘의 맛집 발견 (맛집)", "집밥 한 끼 (맛집)"]
