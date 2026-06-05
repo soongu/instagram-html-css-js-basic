@@ -159,6 +159,30 @@ article audio {
   cursor: pointer;
 }
 
+/* ===== 댓글 목록 (D-1: JS 로 추가/삭제) ===== */
+.comment-list {
+  margin: 0.25rem 0 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.15rem 0;
+  font-size: 0.875rem;
+}
+
+.comment-del {
+  border: none;
+  background: none;
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
 /* ===== 스토리 링 — 무지개 테두리 안에 동그란 아바타 ===== */
 .story-ring {
   display: inline-block;
