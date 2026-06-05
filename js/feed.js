@@ -1,50 +1,58 @@
 // instagram-clone-frontend/js/feed.js
-// D-1: DOM 조작 — 화면 요소를 찾아 읽고, 바꾸고, 만들고, 지우는 연습장
-// Live Server 로 feed.html 을 열고 콘솔(F12 → Console)을 함께 보세요.
+// D-2: 이벤트 핸들링 — 지난 시간에 만든 함수(toggleLike·addComment·removeComment)를
+//      클릭과 제출에 연결해, 콘솔을 직접 두드리지 않아도 화면에서 바로 동작하게 만들어요.
 
 import { toggleLike } from "./like.js";
 import { addComment, removeComment } from "./comment.js";
+import { debounce, throttle } from "./util.js";
 
-// ===== Step 2. 요소 찾기 — querySelector / querySelectorAll =====
-// B 카테고리에서 CSS 로 쓰던 그 선택자 문법 그대로예요.
-const firstLikes = document.querySelector(".post-likes");   // 맞는 첫 하나
-console.log(firstLikes);                 // <p class="post-likes">좋아요 1,240개</p>
+// 첫 게시물에 댓글 두 줄을 미리 깔아둬요. addComment 가 '삭제' 버튼까지 함께 만들어줘요.
+addComment(0, "minji_ 사진 너무 예뻐요!");
+addComment(0, "yuna 다음 여행 같이 가요");
 
-const allArticles = document.querySelectorAll("article");   // 맞는 것 전부 (NodeList)
-console.log("게시물 개수:", allArticles.length);            // 게시물 개수: 10
+// ===== 이벤트 위임 — main 한 곳에서 모든 클릭을 받아요 =====
+// 게시물이 10개든 100개든 리스너는 여기 하나뿐. 클릭이 자식에서 부모로 올라오는(버블링) 덕분이에요.
+const feed = document.querySelector("main");
 
-// ===== Step 3. 내용 읽고 바꾸기 — textContent vs innerHTML =====
-const caption = document.querySelector(".post-caption");
-console.log(caption.textContent);   // 글자만: "jaehoon오늘의 일상 — ..."
-console.log(caption.innerHTML);     // 태그째: "<strong>jaehoon</strong>오늘의..."
+feed.addEventListener("click", (event) => {
+  // event.target = 실제로 눌린 가장 안쪽 요소. closest 로 위로 올라가며 진짜 대상을 찾아요.
 
-// ===== Step 4. 속성·클래스 조작 — getAttribute / classList =====
-const firstArticle = document.querySelector("article");
-const likeBtn = firstArticle.querySelector(".icon-btn-like");
-console.log(likeBtn.getAttribute("aria-label"));      // "좋아요"
-console.log(likeBtn.classList.contains("is-active")); // false (아직 안 눌렀어요)
+  // 1) 좋아요 하트 — 안쪽 svg 를 눌러도 closest 가 버튼까지 올라가요
+  const likeBtn = event.target.closest(".icon-btn-like");
+  if (likeBtn) {
+    const article = likeBtn.closest("article");
+    const index = [...document.querySelectorAll("article")].indexOf(article);
+    toggleLike(index);
+    return;
+  }
 
-// ===== Step 5. 요소 만들기 — createElement + append =====
-// 첫 게시물의 댓글 목록(.comment-list)에 댓글 두 줄을 JS 로 만들어 붙여요.
-const list = firstArticle.querySelector(".comment-list");
+  // 2) 댓글 삭제 버튼 — 페이지 로드 뒤 새로 생긴 버튼도 위임이라 그대로 잡혀요
+  const delBtn = event.target.closest(".comment-del");
+  if (delBtn) {
+    removeComment(delBtn.closest("li"));
+  }
+});
 
-const c1 = document.createElement("li");      // 빈 <li> 를 메모리에 만들고
-c1.className = "comment";
-c1.textContent = "minji_ 사진 너무 예뻐요!";  // 글자를 넣고 (textContent — 안전)
-list.append(c1);                              // 목록 맨 뒤에 붙이면 화면에 등장
+// ===== 댓글 폼 제출 — preventDefault 로 새로고침을 막아요 =====
+const form = document.querySelector(".comment-form");
+const input = form.querySelector(".comment-input");
 
-const c2 = document.createElement("li");
-c2.className = "comment";
-c2.textContent = "yuna 다음 여행 같이 가요";
-list.append(c2);
+form.addEventListener("submit", (event) => {
+  event.preventDefault();        // 폼의 기본 동작(페이지 새로고침)을 멈춰요
+  const text = input.value.trim();
+  if (!text) return;             // 빈 댓글은 무시
+  addComment(0, text);           // 첫 게시물에 댓글 추가
+  input.value = "";              // 입력칸 비우기
+});
 
-// ===== Step 6. 요소 지우기 — remove =====
-// 방금 만든 두 번째 댓글(c2)을 화면에서 떼어내요. 첫 줄만 남죠.
-c2.remove();
+// ===== 입력 중 글자 수 — 디바운스 (입력이 멈춘 뒤 0.4초에 한 번만) =====
+const showCount = debounce(() => {
+  console.log("현재 글자 수:", input.value.length);
+}, 400);
+input.addEventListener("input", showCount);
 
-// ===== Step 7~8 실습은 콘솔에서 직접 불러서 확인해요 =====
-// 모듈 안 함수는 콘솔에서 바로 안 보여서, window 에 붙여 둘게요.
-window.toggleLike = toggleLike;
-window.addComment = addComment;
-window.removeComment = removeComment;
-console.log("콘솔에서 toggleLike(0) 또는 addComment(0, '댓글!') 를 쳐보세요.");
+// ===== 스크롤 위치 — 스로틀 (0.3초에 한 번만) =====
+const onScroll = throttle(() => {
+  console.log("스크롤 위치:", Math.round(window.scrollY));
+}, 300);
+window.addEventListener("scroll", onScroll);
