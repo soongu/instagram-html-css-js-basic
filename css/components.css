@@ -607,3 +607,175 @@ article audio {
 .scroll-sentinel {
   height: 1px;
 }
+
+/* =================================================================
+   B-7: 애니메이션 & 전환
+   정적이던 화면에 '시간'을 입히는 규칙 모음
+   ================================================================= */
+
+/* ----- Step 1~2: transition — 상태가 바뀔 때 부드럽게 ----- */
+/* 팔로우/전환 글자 버튼 — 색이 천천히 바뀌게 */
+.suggest-follow,
+.me-switch,
+.signup-link,
+.fb-login {
+  transition: color 0.2s ease;
+}
+
+.suggest-follow:hover,
+.me-switch:hover {
+  color: var(--ig-blue-strong);
+}
+
+/* 프로필 편집 버튼 — 배경색이 부드럽게 */
+.btn-edit {
+  transition: background-color 0.2s ease;
+}
+
+.btn-edit:hover {
+  background-color: var(--color-border);
+}
+
+/* 로그인 버튼 — 배경색만 골라서 전환 (all 대신 속성 지정) */
+.btn-login {
+  transition: background-color 0.2s ease;
+}
+
+/* ----- Step 3: transform — 움직이고 키우고 ----- */
+/* 아이콘 버튼에 hover 하면 살짝 커지기 */
+.icon-btn .ico {
+  transition: transform 0.15s ease;
+}
+
+.icon-btn:hover .ico {
+  transform: scale(1.15);
+}
+
+/* ----- Step 4: 인터랙션 디자인 — hover / focus / active ----- */
+/* 누르는 순간 살짝 눌리는 느낌 (active) */
+.icon-btn:active .ico {
+  transform: scale(0.9);
+}
+
+/* 키보드로 이동했을 때만 또렷한 포커스 링 (마우스 클릭엔 안 뜸) */
+.icon-btn:focus-visible,
+.suggest-follow:focus-visible,
+.btn-login:focus-visible,
+.btn-edit:focus-visible {
+  outline: 2px solid var(--ig-blue);
+  outline-offset: 2px;
+}
+
+/* ----- Step 5: @keyframes — 좋아요 하트 '통!' ----- */
+/* 좋아요가 켜질 때 하트가 한 번 튀어오르는 애니메이션 */
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.4);
+  }
+  60% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* like.js 가 .is-active 를 붙이는 순간 이 애니메이션이 한 번 재생돼요 */
+.icon-btn-like.is-active .ico {
+  animation: heart-pop 0.4s ease;
+}
+
+/* ----- Step 6: @starting-style — 모달이 스르륵 등장 ----- */
+/* 공유 다이얼로그: 닫힘(기본) → 열림([open]) 사이를 부드럽게 */
+#shareDialog {
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    overlay 0.2s ease allow-discrete,
+    display 0.2s ease allow-discrete;
+}
+
+#shareDialog[open] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 열리기 '직전'의 출발 모습 — 이게 없으면 등장 애니메이션이 안 보여요 */
+@starting-style {
+  #shareDialog[open] {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+/* 뒤 배경(backdrop)도 함께 서서히 어두워지게 */
+#shareDialog::backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  transition:
+    background-color 0.2s ease,
+    overlay 0.2s ease allow-discrete,
+    display 0.2s ease allow-discrete;
+}
+
+#shareDialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 50%);
+}
+
+@starting-style {
+  #shareDialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0%);
+  }
+}
+
+/* 더보기 메뉴(popover)도 같은 결로 스르륵 */
+#postMenu {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease,
+    overlay 0.15s ease allow-discrete,
+    display 0.15s ease allow-discrete;
+}
+
+#postMenu:popover-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@starting-style {
+  #postMenu:popover-open {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* ----- Step 7: View Transitions API — 페이지가 끊기지 않게 ----- */
+/* 같은 사이트 안 페이지 이동에 자동으로 부드러운 전환을 켜요. */
+/* 지원 안 하는 브라우저는 그냥 전환 없이 평소대로 넘어가요(점진적 향상). */
+@view-transition {
+  navigation: auto;
+}
+
+/* 페이지가 바뀌어도 'Instagram' 로고는 사라졌다 나타나지 않고 */
+/* 제자리에서 자연스럽게 이어지도록 같은 이름표를 붙여요. */
+.logo {
+  view-transition-name: site-logo;
+}
+
+/* ----- Step 8: prefers-reduced-motion — 멀미 없는 모션 ----- */
+/* 움직임을 줄여달라고 설정한 사용자에겐 애니메이션을 거의 0 으로 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
