@@ -14,6 +14,14 @@ export function toggleLike(index) {
   const likeBtn = article.querySelector(".icon-btn-like");
   const liked = likeBtn.classList.toggle("is-active");
 
+  //    빈 하트(#ico-heart) ↔ 꽉 찬 하트(#ico-heart-fill) 로 아이콘을 갈아끼워요.
+  //    is-active 의 color:red 와 합쳐져, 켜지면 '꽉 찬 빨간 하트' 로 보여요.
+  const heartUse = likeBtn.querySelector("use");
+  heartUse.setAttribute(
+    "href",
+    liked ? "assets/icons.svg#ico-heart-fill" : "assets/icons.svg#ico-heart"
+  );
+
   // 2) 좋아요 숫자 갱신 — <strong> 안의 글자만 textContent 로 바꿔요
   const strong = article.querySelector(".post-likes strong");
   let count = Number(strong.textContent.replaceAll(",", "")); // "1,240" → 1240

@@ -83,7 +83,9 @@ article audio {
 }
 
 /* 좋아요는 누르면 빨갛게 — 활성 상태 색 (정적 데모) */
-.icon-btn-like.is-active {
+/* base.css 의 `.ico { color: 검정 }` 이 svg 에 직접 걸려 있어서, */
+/* 버튼이 아니라 .ico 를 직접 빨갛게 해줘야 currentColor(fill) 가 빨개져요. */
+.icon-btn-like.is-active .ico {
   color: var(--ig-red);
 }
 
