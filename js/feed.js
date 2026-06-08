@@ -18,6 +18,8 @@ export function renderPost(post) {
         <strong class="post-author">${post.username}</strong>
       </a>
       <time class="post-time">${post.time}</time>
+      <button type="button" class="post-more" popovertarget="postMenu" aria-label="더보기">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-dots"></use></svg></button>
     </header>
     <figure>
       <img src="${post.image}" alt="${post.alt}" width="600" height="600" loading="lazy">
@@ -27,6 +29,8 @@ export function renderPost(post) {
         <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart"></use></svg></button>
       <button type="button" class="icon-btn" aria-label="댓글">
         <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg></button>
+      <button type="button" class="icon-btn icon-btn-share" command="show-modal" commandfor="shareDialog" aria-label="공유">
+        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-share"></use></svg></button>
       <button type="button" class="icon-btn icon-btn-save" aria-label="저장">
         <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-save"></use></svg></button>
     </div>
