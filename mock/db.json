@@ -1,0 +1,97 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "username": "jaehoon",
+      "avatar": "https://picsum.photos/seed/avatar1/64/64",
+      "time": "5시간",
+      "image": "https://picsum.photos/seed/insta1/600/600",
+      "alt": "석양이 지는 제주도 협재 해변 — 하늘이 주황빛으로 물들었다",
+      "likes": 1240,
+      "caption": "오늘의 일상 — 제주도 협재 해변. 노을이 정말 예술이었어요 #sunset #travel",
+      "commentCount": 84
+    },
+    {
+      "id": 2,
+      "username": "minari_cafe",
+      "avatar": "https://picsum.photos/seed/avatar2/64/64",
+      "time": "8시간",
+      "image": "https://picsum.photos/seed/insta2/600/600",
+      "alt": "동네 카페 테이블 위에 놓인 라떼아트가 그려진 커피잔",
+      "likes": 312,
+      "caption": "오늘 발견한 동네 카페 #coffee #latte",
+      "commentCount": 12
+    },
+    {
+      "id": 3,
+      "username": "dog_daily",
+      "avatar": "https://picsum.photos/seed/avatar3/64/64",
+      "time": "12시간",
+      "image": "https://picsum.photos/seed/insta3/600/600",
+      "alt": "공원 잔디밭에서 공을 물고 뛰어오는 골든 리트리버",
+      "likes": 2038,
+      "caption": "주말 산책 친구 #goldenretriever #weekend",
+      "commentCount": 56
+    },
+    {
+      "id": 4,
+      "username": "riverside_kim",
+      "avatar": "https://picsum.photos/seed/avatar4/64/64",
+      "time": "1일",
+      "image": "https://picsum.photos/seed/insta4/600/600",
+      "alt": "해질녘 강가에서 노을을 바라보는 사람의 실루엣",
+      "likes": 540,
+      "caption": "강가의 노을 #riverside #sunset",
+      "commentCount": 9
+    },
+    {
+      "id": 5,
+      "username": "mountain_lee",
+      "avatar": "https://picsum.photos/seed/avatar5/64/64",
+      "time": "1일",
+      "image": "https://picsum.photos/seed/insta5/600/600",
+      "alt": "눈 쌓인 산 정상에서 본 일출 풍경",
+      "likes": 4210,
+      "caption": "새해 첫 일출 #mountain #sunrise",
+      "commentCount": 132
+    },
+    {
+      "id": 6,
+      "username": "alley_walker",
+      "avatar": "https://picsum.photos/seed/avatar6/64/64",
+      "time": "2일",
+      "image": "https://picsum.photos/seed/insta6/600/600",
+      "alt": "작은 골목길 카페 앞 자전거 한 대",
+      "likes": 88,
+      "caption": "골목 산책 #alleyway #bike",
+      "commentCount": 3
+    },
+    {
+      "id": 7,
+      "username": "book_nook",
+      "avatar": "https://picsum.photos/seed/avatar7/64/64",
+      "time": "3일",
+      "image": "https://picsum.photos/seed/insta7/600/600",
+      "alt": "도서관 책장 사이로 비치는 따스한 햇살",
+      "likes": 1002,
+      "caption": "오후의 도서관 #library #reading",
+      "commentCount": 41
+    },
+    {
+      "id": 8,
+      "username": "cloud9_travel",
+      "avatar": "https://picsum.photos/seed/avatar8/64/64",
+      "time": "3일",
+      "image": "https://picsum.photos/seed/insta8/600/600",
+      "alt": "비행기 창가에서 내려다본 구름 위 풍경",
+      "likes": 6500,
+      "caption": "구름 위에서 #airplane #travel",
+      "commentCount": 210
+    }
+  ],
+  "comments": [
+    { "id": 1, "postId": 1, "username": "minji_", "text": "사진 너무 예뻐요!" },
+    { "id": 2, "postId": 1, "username": "yuna", "text": "다음 여행 같이 가요" },
+    { "id": 3, "postId": 3, "username": "happy_dog", "text": "리트리버 너무 귀여워요" }
+  ]
+}
