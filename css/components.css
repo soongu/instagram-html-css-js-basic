@@ -688,6 +688,136 @@ article audio {
   animation: heart-pop 0.4s ease;
 }
 
+/* ----- 모달·팝오버 생김새 (Step 6 에서 애니메이션을 입힐 대상) ----- */
+/* 공유 다이얼로그 — 가운데 뜨는 흰 카드 */
+#shareDialog {
+  width: min(90vw, 22rem);
+  padding: 1.5rem;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 20%);
+}
+
+#shareDialog h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+#shareDialog > p {
+  margin: 0 0 1.25rem;
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+#shareDialog label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+#shareDialog input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* 보내기 — 파란 풀폭 버튼 */
+#shareDialog form[method="post"] button {
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--ig-blue);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 닫기 — 연한 텍스트 버튼 */
+#shareDialog form[method="dialog"] {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+#shareDialog form[method="dialog"] button {
+  padding: 0.4rem;
+  border: none;
+  background: none;
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* 더보기 메뉴 — 가운데 뜨는 액션 시트 */
+#postMenu {
+  width: min(90vw, 18rem);
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 20%);
+  overflow: hidden;
+}
+
+#postMenu > p {
+  margin: 0;
+  padding: 0.85rem;
+  border-bottom: 1px solid var(--color-divider);
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+#postMenu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#postMenu li {
+  border-bottom: 1px solid var(--color-divider);
+}
+
+#postMenu li a {
+  display: block;
+  padding: 0.85rem;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  text-align: center;
+  transition: background-color 0.15s ease;
+}
+
+#postMenu li a:hover {
+  background-color: var(--color-hover);
+}
+
+/* 위험한 행동(신고하기)은 빨갛게 — 인스타 결 */
+#postMenu li:first-child a {
+  color: var(--ig-red);
+  font-weight: 600;
+}
+
+#postMenu > button {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+#postMenu > button:hover {
+  background-color: var(--color-hover);
+}
+
 /* ----- Step 6: @starting-style — 모달이 스르륵 등장 ----- */
 /* 공유 다이얼로그: 닫힘(기본) → 열림([open]) 사이를 부드럽게 */
 #shareDialog {
