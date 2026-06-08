@@ -1,17 +1,16 @@
 // instagram-clone-frontend/js/feed.js
-// D-3: 서버에서 게시물을 받아 화면에 그려요.
-//      지난 시간엔 게시물이 feed.html 에 글자로 박혀 있었는데,
-//      이제 json-server 에서 데이터로 받아 와 직접 그려요.
+// D-4: 서버에서 게시물을 "한 페이지씩" 받아 무한 스크롤로 그려요.
+//      댓글은 fetch(POST)로 서버에 저장한 뒤 화면에 반영해요.
 
-import { fetchPosts } from "./api.js";
+import { fetchPosts, createComment } from "./api.js";
 import { toggleLike } from "./like.js";
 import { addComment, removeComment } from "./comment.js";
-import { debounce, throttle } from "./util.js";
+import { setupInfiniteScroll } from "./infinite-scroll.js";
 
 // 게시물 데이터(객체) 하나를 받아 <article> 한 채를 만들어 돌려줘요.
-// D-1 에서 쓴 createElement / innerHTML 을 그대로 써요.
 export function renderPost(post) {
   const article = document.createElement("article");
+  article.dataset.postId = post.id; // 어느 게시물인지 기억해 둬요 (댓글 POST 에 필요)
   article.innerHTML = `
     <header class="post-header">
       <a class="post-user" href="profile.html">
@@ -43,23 +42,64 @@ export function renderPost(post) {
   return article;
 }
 
-// 페이지가 열리면 서버에서 게시물을 받아 .feed-main 에 차례로 그려요.
-async function loadFeed() {
-  const posts = await fetchPosts(); // 서버 응답을 기다려요
-  const feedMain = document.querySelector(".feed-main");
-  for (const post of posts) {
-    feedMain.append(renderPost(post)); // 데이터 한 칸 → article 한 채
+const feedMain = document.querySelector(".feed-main");
+
+// 목록 맨 아래의 "감시병" — 이게 화면에 보이면 다음 페이지를 불러와요.
+const sentinel = document.createElement("div");
+sentinel.className = "scroll-sentinel";
+feedMain.append(sentinel);
+
+// ===== 로딩 표시 — 불러오는 동안 스피너를 보여줘요 =====
+function showLoading() {
+  const box = document.createElement("div");
+  box.className = "loading";
+  box.innerHTML = `<span class="spinner" aria-hidden="true"></span> 불러오는 중...`;
+  feedMain.insertBefore(box, sentinel); // 감시병 바로 위에 끼워 넣어요
+  return box;
+}
+
+// ===== 에러 토스트 — 잠깐 떴다 사라지는 알림 =====
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+  document.body.append(toast);
+  setTimeout(() => toast.remove(), 3000); // 3초 뒤 스스로 사라져요
+}
+
+// ===== 페이지 단위 로딩 =====
+let currentPage = 1; // 다음에 불러올 페이지 번호
+let hasMore = true;  // 더 받을 게 남았는지
+
+async function loadPage() {
+  const loadingBox = showLoading();
+  try {
+    const result = await fetchPosts(currentPage); // { data, next, ... }
+    for (const post of result.data) {
+      feedMain.insertBefore(renderPost(post), sentinel); // 감시병 위에 차례로
+    }
+    hasMore = result.next !== null; // next 가 null 이면 마지막 페이지
+    currentPage += 1;
+  } catch (error) {
+    showToast(error.message); // 실패하면 사용자에게 알려요
+  } finally {
+    loadingBox.remove(); // 성공이든 실패든 스피너는 치워요
   }
 }
 
-loadFeed();
+// ===== 무한 스크롤 — 감시병이 보일 때마다 다음 페이지 =====
+setupInfiniteScroll(sentinel, async () => {
+  if (!hasMore) return; // 다 불러왔으면 더 안 해요
+  await loadPage();
+});
+
+loadPage(); // 첫 페이지를 바로 불러와요
 
 // ===== 이벤트 위임 — main 한 곳에서 모든 클릭을 받아요 =====
-// 핵심: 게시물은 fetch 가 끝난 뒤에야 생기는데, 위임이라 나중에 생긴 글에도 그대로 동작해요.
 const feed = document.querySelector("main");
 
 feed.addEventListener("click", (event) => {
-  // 1) 좋아요 하트 — 안쪽 svg 를 눌러도 closest 가 버튼까지 올라가요
+  // 1) 좋아요 하트
   const likeBtn = event.target.closest(".icon-btn-like");
   if (likeBtn) {
     const article = likeBtn.closest("article");
@@ -75,33 +115,24 @@ feed.addEventListener("click", (event) => {
   }
 });
 
-// ===== 댓글 폼 제출 — 이제 게시물마다 폼이 있어서 위임으로 받아요 =====
-feed.addEventListener("submit", (event) => {
+// ===== 댓글 폼 제출 — 서버에 저장(POST)한 뒤 화면에 반영 =====
+feed.addEventListener("submit", async (event) => {
   const form = event.target.closest(".comment-form");
   if (!form) return;
   event.preventDefault(); // 폼의 기본 동작(새로고침)을 멈춰요
 
   const article = form.closest("article");
-  const index = [...document.querySelectorAll("article")].indexOf(article);
   const input = form.querySelector(".comment-input");
   const text = input.value.trim();
   if (!text) return; // 빈 댓글은 무시
 
-  addComment(index, text); // 그 게시물에 댓글 추가
-  input.value = ""; // 입력칸 비우기
+  const postId = Number(article.dataset.postId);
+  try {
+    const saved = await createComment(postId, text); // 1) 서버에 저장(POST)
+    const index = [...document.querySelectorAll("article")].indexOf(article);
+    addComment(index, saved.text);                    // 2) 응답을 화면에 추가
+    input.value = "";                                 // 3) 입력칸 비우기
+  } catch (error) {
+    showToast("댓글을 저장하지 못했어요: " + error.message);
+  }
 });
-
-// ===== 입력 중 글자 수 — 디바운스 (입력이 멈춘 뒤 0.4초에 한 번만) =====
-const showCount = debounce((value) => {
-  console.log("현재 글자 수:", value.length);
-}, 400);
-feed.addEventListener("input", (event) => {
-  const input = event.target.closest(".comment-input");
-  if (input) showCount(input.value);
-});
-
-// ===== 스크롤 위치 — 스로틀 (0.3초에 한 번만) =====
-const onScroll = throttle(() => {
-  console.log("스크롤 위치:", Math.round(window.scrollY));
-}, 300);
-window.addEventListener("scroll", onScroll);
