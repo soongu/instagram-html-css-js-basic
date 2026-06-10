@@ -110,9 +110,10 @@ body > header {
   left: 0;
   width: 100%;
   padding: 0.5rem 1rem;
-  background-color: #ffffff;
-  border-bottom: 1px solid #dbdbdb;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
   z-index: 100;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 /* 고정 헤더가 본문 첫 줄을 가리지 않도록 + 여유 간격까지 아래로 밀기 */
@@ -135,8 +136,8 @@ body > header h1 {
   top: 0.5rem;
   left: 0.5rem;
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  background-color: #0095f6;
+  border-radius: var(--radius-sm);
+  background-color: var(--ig-blue);
   color: #ffffff;
   font-size: 0.8rem;
   font-weight: bold;

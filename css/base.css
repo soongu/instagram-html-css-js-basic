@@ -9,6 +9,7 @@ body {
   color: var(--color-text);
   font-family: var(--font-base);
   font-size: 0.875rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 a {

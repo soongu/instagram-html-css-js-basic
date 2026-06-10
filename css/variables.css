@@ -6,6 +6,9 @@
    화면(레이아웃·컴포넌트)은 의미 토큰만 참조한다.
    =========================================================== */
 :root {
+  /* 폼 컨트롤·스크롤바도 라이트/다크 테마를 따르게 */
+  color-scheme: light dark;
+
   /* ===== 원시 토큰 — 색 팔레트의 날것 값 ===== */
   --blue-500: #0095f6;
   --blue-600: #1877f2;
@@ -50,4 +53,21 @@
   /* ===== 글꼴 ===== */
   --font-base: "Apple SD Gothic Neo", "Segoe UI", system-ui, sans-serif;
   --font-logo: "Grand Hotel", "Apple SD Gothic Neo", cursive;
+}
+
+/* ===========================================================
+   다크 모드 — 운영체제가 어두운 테마면 의미 토큰만 갈아끼운다
+   (원시 토큰·레이아웃·글꼴은 그대로, 색의 "쓰임새"만 재정의)
+   =========================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: #fafafa;
+    --color-text-soft: #a8a8a8;
+    --color-link: #5aa7ff;
+    --color-bg: #000000;
+    --color-surface: #121212;
+    --color-border: #363636;
+    --color-divider: #262626;
+    --color-hover: #1a1a1a;
+  }
 }

@@ -535,7 +535,7 @@ article audio {
 }
 
 .meta-wordmark span {
-  color: #444444;
+  color: var(--color-text);
   font-weight: 700;
 }
 
