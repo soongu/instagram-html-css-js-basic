@@ -145,3 +145,30 @@ for (const key in adPost) {
   console.log("for...in 에 보이는 키:", key); // username 만 나와요
 }
 console.log(JSON.stringify(adPost)); // {"username":"ad_official"} — 심볼 키는 JSON 에도 안 실려요
+
+// ===== E-2 Step 2. 표준 Error 객체 톺아보기 =====
+// 커스텀 에러를 만들기 전에, JavaScript 가 기본으로 주는 Error 부터 뜯어봐요.
+// Error 는 그냥 "에러 정보를 담은 객체"예요. new 로 만들 수 있어요(아직 던지진 않았어요).
+const basicError = new Error("무언가 잘못됐어요");
+console.log("name:", basicError.name);       // "Error" — 에러의 종류 이름
+console.log("message:", basicError.message); // "무언가 잘못됐어요" — 우리가 넣은 설명
+console.log("stack:", basicError.stack);     // 어디서 났는지 추적 (형식은 환경마다 달라요)
+
+// 종류별 에러도 다 Error 의 자식이에요 — name 만 다르고 구조는 같아요.
+const typeError = new TypeError("숫자가 와야 하는데 글자가 왔어요");
+console.log(typeError.name);                 // "TypeError"
+console.log(typeError instanceof Error);     // true — TypeError 도 결국 Error
+
+// ES2022: cause — "이 에러를 일으킨 진짜 원인"을 체인으로 매달아요.
+// 바깥 에러는 사람이 읽을 메시지, cause 는 디버깅용 원본 에러를 품어요.
+try {
+  try {
+    JSON.parse("{ 깨진 JSON }"); // 여기서 SyntaxError 가 나요
+  } catch (parseError) {
+    // 원본(parseError)을 cause 로 감싸 다시 던져요.
+    throw new Error("프로필을 불러오지 못했어요", { cause: parseError });
+  }
+} catch (error) {
+  console.log("바깥 메시지:", error.message);        // 프로필을 불러오지 못했어요
+  console.log("원인(cause):", error.cause.name);     // "SyntaxError" — 진짜 원인이 남아 있어요
+}
