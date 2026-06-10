@@ -48,6 +48,7 @@ export class PostCard {
     <ul class="comment-list"></ul>
     <form class="comment-form">
       <textarea class="comment-input" rows="1" placeholder="댓글 달기..." aria-label="댓글 입력"></textarea>
+      <button type="button" class="comment-emoji" aria-label="이모지 넣기">😊</button>
       <button type="submit">게시</button>
     </form>
   `;

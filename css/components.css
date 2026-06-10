@@ -944,3 +944,51 @@ article audio {
 .theme-toggle:hover {
   background-color: var(--color-hover);
 }
+
+/* ===== 이모지 고르개 (E-3: 동적 import 로 불러오는 모듈이 띄우는 패널) ===== */
+.comment-emoji {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.emoji-picker[hidden] {
+  display: none;
+}
+
+.emoji-picker {
+  position: fixed;
+  z-index: 200;
+  width: 16rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
+}
+
+.emoji-search {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.25rem;
+}
+
+.emoji-item {
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.emoji-item:hover {
+  background-color: var(--color-hover);
+}

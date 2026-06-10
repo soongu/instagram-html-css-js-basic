@@ -81,7 +81,7 @@ loadPage(); // 첫 페이지를 바로 불러와요
 // ===== 이벤트 위임 — main 한 곳에서 모든 클릭을 받아요 =====
 const feed = document.querySelector("main");
 
-feed.addEventListener("click", (event) => {
+feed.addEventListener("click", async (event) => {
   // 1) 좋아요 하트
   const likeBtn = event.target.closest(".icon-btn-like");
   if (likeBtn) {
@@ -95,6 +95,23 @@ feed.addEventListener("click", (event) => {
   const delBtn = event.target.closest(".comment-del");
   if (delBtn) {
     removeComment(delBtn.closest("li"));
+    return;
+  }
+
+  // 3) 이모지 버튼 — 누르는 그 순간에야 이모지 고르개 모듈을 받아와요(동적 import).
+  //    필요할 때만 불러오니 첫 화면은 그만큼 가벼워져요.
+  const emojiBtn = event.target.closest(".comment-emoji");
+  if (emojiBtn) {
+    const input = emojiBtn.closest(".comment-form").querySelector(".comment-input");
+    try {
+      // import()는 Promise 를 돌려줘요 — 모듈이 도착할 때까지 기다렸다(await) 꺼내 써요.
+      const { openEmojiPicker } = await import("./emoji-picker.js");
+      openEmojiPicker(emojiBtn, input);
+    } catch (error) {
+      // 네트워크로 받아오다 실패할 수도 있어요 — 비동기가 있는 곳엔 에러 처리가 따라다녀요.
+      showToast("이모지 고르개를 불러오지 못했어요.");
+      console.error("emoji-picker 로딩 실패:", error);
+    }
   }
 });
 
