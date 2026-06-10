@@ -1,21 +1,14 @@
 /* instagram-clone-frontend/css/base.css */
 
 /* 디자인 토큰(--ig-blue, --color-text 등)은 css/variables.css 로 분리했다. */
+/* 브라우저 기본값 초기화(box-sizing·바깥 여백 등)는 css/reset.css 로 분리했다. */
 
-/* ===== 모든 요소를 border-box로 — 너비 계산을 직관적으로 ===== */
-* {
-  box-sizing: border-box;
-}
-
-/* ===== 페이지 바탕 (태그 선택자 + 타이포그래피) ===== */
+/* ===== 페이지 바탕 (색 + 타이포그래피) ===== */
 body {
-  margin: 0;
   background-color: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-base);
   font-size: 0.875rem;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
 }
 
 a {
