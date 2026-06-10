@@ -1,0 +1,53 @@
+/* instagram-clone-frontend/css/variables.css */
+
+/* ===========================================================
+   디자인 토큰 — 색·둥근 모서리·치수·글꼴을 한곳에서 관리
+   원시 토큰(palette) → 의미 토큰(semantic) 2단 구조
+   화면(레이아웃·컴포넌트)은 의미 토큰만 참조한다.
+   =========================================================== */
+:root {
+  /* ===== 원시 토큰 — 색 팔레트의 날것 값 ===== */
+  --blue-500: #0095f6;
+  --blue-600: #1877f2;
+  --blue-900: #00376b;
+  --red-500: #ed4956;
+
+  --gray-0: #ffffff;
+  --gray-50: #fafafa;
+  --gray-100: #efefef;
+  --gray-150: #f2f2f2;
+  --gray-200: #dbdbdb;
+  --gray-500: #8e8e8e;
+  --gray-900: #262626;
+
+  /* ===== 의미 토큰 — "쓰임새"로 이름 붙인 값 ===== */
+  --ig-blue: var(--blue-500);
+  --ig-blue-strong: var(--blue-600);
+  --ig-red: var(--red-500);
+
+  --color-text: var(--gray-900);
+  --color-text-soft: var(--gray-500);
+  --color-link: var(--blue-900);
+  --color-bg: var(--gray-50);
+  --color-surface: var(--gray-0);
+  --color-border: var(--gray-200);
+  --color-divider: var(--gray-100);
+  --color-hover: var(--gray-150);
+
+  /* ===== 둥근 모서리 ===== */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* ===== 레이아웃 치수 ===== */
+  --sidebar-w: 244px;       /* 데스크톱 사이드바(라벨 포함) */
+  --sidebar-w-narrow: 72px; /* 좁은 화면 아이콘 전용 레일 */
+  --feed-w: 470px;          /* 가운데 피드 한 컬럼 폭 */
+  --aside-w: 320px;         /* 오른쪽 추천 사이드바 폭 */
+  --content-max: 935px;     /* 프로필 등 넓은 본문 폭 */
+
+  /* ===== 글꼴 ===== */
+  --font-base: "Apple SD Gothic Neo", "Segoe UI", system-ui, sans-serif;
+  --font-logo: "Grand Hotel", "Apple SD Gothic Neo", cursive;
+}
