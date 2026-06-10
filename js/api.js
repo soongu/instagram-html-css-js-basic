@@ -3,8 +3,10 @@
 //      지난 시간엔 게시물을 받아 오기(GET)만 했는데,
 //      이제 페이지 단위로 받고(무한 스크롤), 댓글을 저장(POST)해요.
 // D-5: 모든 요청에 "이건 누구의 요청이다"(토큰)를 자동으로 실어 보내요.
+// E-2: 요청이 실패하면 뭉뚱그린 Error 대신, 상태 코드·주소를 담은 ApiError 로 던져요.
 
 import { getToken, getCurrentUser } from "./auth.js";
+import { ApiError } from "./api-error.js";
 
 const BASE_URL = "http://localhost:3001";
 
@@ -39,7 +41,8 @@ export async function fetchPosts(page = 1, perPage = 3) {
   });
   if (!response.ok) {
     // 200번대가 아니면(404·500 등) 에러를 위로 던져요. 부르는 쪽이 토스트로 알려요.
-    throw new Error(describeStatus(response.status));
+    // 상태 코드·주소를 ApiError 에 담아 던지면, 받는 쪽이 "뭐가, 왜"로 분기할 수 있어요.
+    throw new ApiError(response.status, url, describeStatus(response.status));
   }
   return await response.json(); // { data, next, last, pages, items, ... }
 }
@@ -49,13 +52,14 @@ export async function fetchPosts(page = 1, perPage = 3) {
 export async function createComment(postId, text) {
   // D-5: 지난 시간엔 "soongu_hong" 으로 고정했던 자리에, 진짜 로그인한 사용자가 들어가요.
   const username = getCurrentUser() ?? "guest"; // 로그인 안 했으면 guest
-  const response = await fetch(`${BASE_URL}/comments`, {
+  const url = `${BASE_URL}/comments`;
+  const response = await fetch(url, {
     method: "POST",                                          // 1) 생성이니까 POST
     headers: authHeaders({ "Content-Type": "application/json" }), // 2) JSON + 토큰
     body: JSON.stringify({ postId, username, text }),        // 3) 객체 → JSON 문자열
   });
   if (!response.ok) {
-    throw new Error(describeStatus(response.status));
+    throw new ApiError(response.status, url, describeStatus(response.status));
   }
   return await response.json(); // 서버가 id 를 붙여 돌려줘요 (201 Created)
 }
