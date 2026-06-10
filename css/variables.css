@@ -56,11 +56,13 @@
 }
 
 /* ===========================================================
-   다크 모드 — 운영체제가 어두운 테마면 의미 토큰만 갈아끼운다
+   다크 모드 — 의미 토큰만 어두운 값으로 갈아끼운다
    (원시 토큰·레이아웃·글꼴은 그대로, 색의 "쓰임새"만 재정의)
    =========================================================== */
+
+/* ① 자동: 운영체제가 어두운 테마일 때 (단, 사용자가 라이트로 강제하지 않은 경우) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-text: #fafafa;
     --color-text-soft: #a8a8a8;
     --color-link: #5aa7ff;
@@ -70,4 +72,16 @@
     --color-divider: #262626;
     --color-hover: #1a1a1a;
   }
+}
+
+/* ② 수동: 사용자가 직접 다크를 고르면 (운영체제 설정을 이긴다) */
+[data-theme="dark"] {
+  --color-text: #fafafa;
+  --color-text-soft: #a8a8a8;
+  --color-link: #5aa7ff;
+  --color-bg: #000000;
+  --color-surface: #121212;
+  --color-border: #363636;
+  --color-divider: #262626;
+  --color-hover: #1a1a1a;
 }
