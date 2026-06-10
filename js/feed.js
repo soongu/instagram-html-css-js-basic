@@ -5,6 +5,7 @@
 //      (게시물 한 채 = 인스턴스 하나. 광고 카드는 AdPostCard 가 상속으로 변형해요.)
 
 import { fetchPosts, createComment } from "./api.js";
+import { ApiError } from "./api-error.js";
 import { toggleLike } from "./like.js";
 import { addComment, removeComment } from "./comment.js";
 import { setupInfiniteScroll } from "./infinite-scroll.js";
@@ -53,7 +54,17 @@ async function loadPage() {
     hasMore = result.next !== null; // next 가 null 이면 마지막 페이지
     currentPage += 1;
   } catch (error) {
-    showToast(error.message); // 실패하면 사용자에게 알려요
+    if (error instanceof ApiError) {
+      // 사용자에겐 친화 메시지만 보여줘요. (상태 코드·주소 같은 속사정은 감춰요)
+      showToast(error.userMessage);
+      // 개발자에겐 전체를 콘솔에 남겨요. message(상태·주소) + stack 까지 다 찍혀요.
+      // 운영 환경이라면 이 자리에서 { statusCode, userMessage } 만 추려 로그 서버로 보내요.
+      console.error("게시물 로딩 실패:", error);
+    } else {
+      // ApiError 가 아닌 예상 밖의 에러(코드 버그 등)는 따로 처리해요.
+      showToast("알 수 없는 오류가 발생했어요.");
+      console.error(error);
+    }
   } finally {
     loadingBox.remove(); // 성공이든 실패든 스피너는 치워요
   }
@@ -105,7 +116,12 @@ feed.addEventListener("submit", async (event) => {
     addComment(index, saved.text);                    // 2) 응답을 화면에 추가
     input.value = "";                                 // 3) 입력칸 비우기
   } catch (error) {
-    showToast("댓글을 저장하지 못했어요: " + error.message);
+    if (error instanceof ApiError) {
+      showToast(error.userMessage); // 같은 패턴 — 받는 쪽은 userMessage 만 보여줘요
+    } else {
+      showToast("댓글을 저장하지 못했어요.");
+    }
+    console.error("댓글 저장 실패:", error);
   }
 });
 
