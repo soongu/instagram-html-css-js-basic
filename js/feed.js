@@ -9,6 +9,7 @@ import { toggleLike } from "./like.js";
 import { addComment, removeComment } from "./comment.js";
 import { setupInfiniteScroll } from "./infinite-scroll.js";
 import { PostCard, AdPostCard } from "./post-card.js";
+import { ThemeToggle } from "./theme-toggle.js";
 
 const feedMain = document.querySelector(".feed-main");
 
@@ -107,3 +108,9 @@ feed.addEventListener("submit", async (event) => {
     showToast("댓글을 저장하지 못했어요: " + error.message);
   }
 });
+
+// ===== 다크 모드 토글 — ThemeToggle 클래스(E-1)가 복원·클릭·저장을 책임져요 =====
+const themeButton = document.querySelector(".theme-toggle");
+if (themeButton) {
+  new ThemeToggle(themeButton, "theme").init();
+}

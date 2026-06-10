@@ -911,7 +911,7 @@ article audio {
 }
 
 /* =================================================================
-   E-1: 광고 카드 표식
+   E-1: 광고 카드 표식 · 다크 모드 토글 버튼
    ================================================================= */
 
 /* 광고 카드의 "광고" 라벨 — 시간(.post-time) 자리에 들어가요 */
@@ -923,4 +923,24 @@ article audio {
 .ad-badge::before {
   content: "•";
   margin-right: 0.5rem;
+}
+
+/* 다크 모드 토글 — 사이드바 항목(.sidebar a)과 같은 생김새의 버튼 */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-hover);
 }
