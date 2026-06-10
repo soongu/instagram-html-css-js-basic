@@ -1,50 +1,14 @@
 // instagram-clone-frontend/js/feed.js
 // D-4: 서버에서 게시물을 "한 페이지씩" 받아 무한 스크롤로 그려요.
 //      댓글은 fetch(POST)로 서버에 저장한 뒤 화면에 반영해요.
+// E-1: 게시물 카드를 만들던 renderPost 함수가 PostCard 클래스로 이사 갔어요.
+//      (게시물 한 채 = 인스턴스 하나. 광고 카드는 AdPostCard 가 상속으로 변형해요.)
 
 import { fetchPosts, createComment } from "./api.js";
 import { toggleLike } from "./like.js";
 import { addComment, removeComment } from "./comment.js";
 import { setupInfiniteScroll } from "./infinite-scroll.js";
-
-// 게시물 데이터(객체) 하나를 받아 <article> 한 채를 만들어 돌려줘요.
-export function renderPost(post) {
-  const article = document.createElement("article");
-  article.dataset.postId = post.id; // 어느 게시물인지 기억해 둬요 (댓글 POST 에 필요)
-  article.innerHTML = `
-    <header class="post-header">
-      <a class="post-user" href="profile.html">
-        <img class="post-avatar" src="${post.avatar}" alt="${post.username} 프로필 사진" width="32" height="32">
-        <strong class="post-author">${post.username}</strong>
-      </a>
-      <time class="post-time">${post.time}</time>
-      <button type="button" class="post-more" popovertarget="postMenu" aria-label="더보기">
-        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-dots"></use></svg></button>
-    </header>
-    <figure>
-      <img src="${post.image}" alt="${post.alt}" width="600" height="600" loading="lazy">
-    </figure>
-    <div class="post-actions">
-      <button type="button" class="icon-btn icon-btn-like" aria-label="좋아요">
-        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart"></use></svg></button>
-      <button type="button" class="icon-btn" aria-label="댓글">
-        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg></button>
-      <button type="button" class="icon-btn icon-btn-share" command="show-modal" commandfor="shareDialog" aria-label="공유">
-        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-share"></use></svg></button>
-      <button type="button" class="icon-btn icon-btn-save" aria-label="저장">
-        <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-save"></use></svg></button>
-    </div>
-    <p class="post-likes">좋아요 <strong>${post.likes.toLocaleString()}</strong>개</p>
-    <p class="post-caption"><strong>${post.username}</strong> ${post.caption}</p>
-    <p class="post-comments"><a href="#comments">댓글 ${post.commentCount}개 모두 보기</a></p>
-    <ul class="comment-list"></ul>
-    <form class="comment-form">
-      <textarea class="comment-input" rows="1" placeholder="댓글 달기..." aria-label="댓글 입력"></textarea>
-      <button type="submit">게시</button>
-    </form>
-  `;
-  return article;
-}
+import { PostCard, AdPostCard } from "./post-card.js";
 
 const feedMain = document.querySelector(".feed-main");
 
@@ -79,9 +43,12 @@ async function loadPage() {
   const loadingBox = showLoading();
   try {
     const result = await fetchPosts(currentPage); // { data, next, ... }
-    for (const post of result.data) {
-      feedMain.insertBefore(renderPost(post), sentinel); // 감시병 위에 차례로
-    }
+    result.data.forEach((post, index) => {
+      // 매 페이지의 마지막(3번째, index 2) 게시물은 광고 카드로 그려요.
+      // 같은 데이터, 다른 모습 — 상속(AdPostCard extends PostCard) 데모예요.
+      const card = index === 2 ? new AdPostCard(post) : new PostCard(post);
+      feedMain.insertBefore(card.render(), sentinel); // 감시병 위에 차례로
+    });
     hasMore = result.next !== null; // next 가 null 이면 마지막 페이지
     currentPage += 1;
   } catch (error) {

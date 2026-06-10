@@ -909,3 +909,18 @@ article audio {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =================================================================
+   E-1: 광고 카드 표식
+   ================================================================= */
+
+/* 광고 카드의 "광고" 라벨 — 시간(.post-time) 자리에 들어가요 */
+.ad-badge {
+  color: var(--color-text-soft);
+  font-size: 0.875rem;
+}
+
+.ad-badge::before {
+  content: "•";
+  margin-right: 0.5rem;
+}
