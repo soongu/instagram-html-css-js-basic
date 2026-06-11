@@ -39,7 +39,7 @@ export class PostCard {
       </picture>
     </figure>
     <div class="post-actions">
-      <button type="button" class="icon-btn icon-btn-like" aria-label="좋아요">
+      <button type="button" class="icon-btn icon-btn-like" aria-label="좋아요" aria-pressed="false">
         <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-heart"></use></svg></button>
       <button type="button" class="icon-btn" aria-label="댓글">
         <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-comment"></use></svg></button>
@@ -48,10 +48,10 @@ export class PostCard {
       <button type="button" class="icon-btn icon-btn-save" aria-label="저장">
         <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-save"></use></svg></button>
     </div>
-    <p class="post-likes">좋아요 <strong>${post.likes.toLocaleString()}</strong>개</p>
+    <p class="post-likes" aria-live="polite" aria-atomic="true">좋아요 <strong>${post.likes.toLocaleString()}</strong>개</p>
     <p class="post-caption"><strong>${post.username}</strong> ${post.caption}</p>
     <p class="post-comments"><a href="#comments">댓글 ${post.commentCount}개 모두 보기</a></p>
-    <ul class="comment-list"></ul>
+    <ul class="comment-list" aria-live="polite"></ul>
     <form class="comment-form">
       <textarea class="comment-input" rows="1" placeholder="댓글 달기..." aria-label="댓글 입력"></textarea>
       <button type="button" class="comment-emoji" aria-label="이모지 넣기">😊</button>

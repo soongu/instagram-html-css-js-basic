@@ -14,6 +14,10 @@ export function toggleLike(index) {
   const likeBtn = article.querySelector(".icon-btn-like");
   const liked = likeBtn.classList.toggle("is-active");
 
+  //    토글 버튼의 '눌림' 상태를 스크린 리더에게 알려줘요. aria-pressed 가 true 면
+  //    '좋아요, 눌림' 처럼 읽혀요. 색(빨간 하트)은 눈으로만 보이니 이 한 줄로 귀에도 전해요.
+  likeBtn.setAttribute("aria-pressed", String(liked));
+
   //    빈 하트(#ico-heart) ↔ 꽉 찬 하트(#ico-heart-fill) 로 아이콘을 갈아끼워요.
   //    is-active 의 color:red 와 합쳐져, 켜지면 '꽉 찬 빨간 하트' 로 보여요.
   const heartUse = likeBtn.querySelector("use");

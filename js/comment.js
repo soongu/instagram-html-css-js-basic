@@ -23,6 +23,9 @@ export function addComment(index, text) {
   delBtn.type = "button";
   delBtn.className = "comment-del";
   delBtn.textContent = "삭제";
+  // 화면엔 "삭제" 두 글자뿐이라, 스크린 리더로 들으면 무엇을 지우는지 흐릿해요.
+  // aria-label 로 "댓글 삭제" 라고 또렷한 이름을 달아줘요(보이는 글자는 그대로).
+  delBtn.setAttribute("aria-label", "댓글 삭제");
 
   li.append(span, delBtn);  // append 는 여러 개를 한 번에 붙일 수 있어요
   list.append(li);          // 목록 맨 뒤에 추가 → 화면에 등장
