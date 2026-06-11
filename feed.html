@@ -20,6 +20,10 @@
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body class="app">
+  <!-- 키보드 사용자가 긴 메뉴를 건너뛰고 본문으로 바로 가는 링크 -->
+  <!-- 평소엔 화면 밖에 숨어 있다가, Tab 으로 포커스되면 맨 위에 나타나요 -->
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+
   <!-- 모바일 상단 바 (작은 화면에서만 보임) -->
   <header class="topbar">
     <h1 class="logo"><a href="index.html">Instagram</a></h1>
@@ -70,7 +74,7 @@
     </button>
   </nav>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <h2>피드</h2>
 
     <div class="feed-layout">

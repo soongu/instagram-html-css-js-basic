@@ -164,8 +164,11 @@ article audio {
   font-family: inherit;
 }
 
-.comment-form textarea:focus {
-  outline: none;
+/* 키보드로 댓글칸에 들어오면 또렷한 포커스 링 — outline 을 없애지 말고 보이게 둬요 */
+.comment-form textarea:focus-visible {
+  outline: 2px solid var(--ig-blue);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm);
 }
 
 .comment-form button {
@@ -678,6 +681,27 @@ article audio {
 .btn-login:focus-visible,
 .btn-edit:focus-visible {
   outline: 2px solid var(--ig-blue);
+  outline-offset: 2px;
+}
+
+/* ----- 본문으로 건너뛰기 링크 (키보드 접근성) ----- */
+/* 평소엔 화면 위쪽 밖으로 숨겼다가, Tab 으로 포커스되면 끌어내려 보여줘요 */
+.skip-link {
+  position: fixed;
+  top: -3rem;
+  left: 0.5rem;
+  z-index: 200;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--gray-900); /* 흰 글자와 14.5:1 — 건너뛰기 링크부터 대비를 지켜요 */
+  color: #ffffff;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  top: 0.5rem;
+  outline: 2px solid var(--color-text);
   outline-offset: 2px;
 }
 
