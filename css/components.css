@@ -24,6 +24,16 @@ article figure video {
   display: block;
 }
 
+/* F-2: 스크롤로 들어오는 사진을 흐릿하게 시작해 또렷이 — JS 가 .lazy-photo 를 켤 때만 적용돼요 */
+.post-photo.lazy-photo {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.post-photo.lazy-photo.is-revealed {
+  opacity: 1;
+}
+
 /* 오디오 플레이어 */
 article audio {
   display: block;

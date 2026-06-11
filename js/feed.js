@@ -10,6 +10,7 @@ import { toggleLike } from "./like.js";
 import { addComment, removeComment } from "./comment.js";
 import { setupInfiniteScroll } from "./infinite-scroll.js";
 import { PostCard, AdPostCard } from "./post-card.js";
+import { revealOnScroll } from "./lazy-image.js";
 import { ThemeToggle } from "./theme-toggle.js";
 
 const feedMain = document.querySelector(".feed-main");
@@ -54,7 +55,12 @@ async function loadPage() {
       const card = index === 2
         ? new AdPostCard(post)
         : new PostCard(post, { priority: isLcp });
-      feedMain.insertBefore(card.render(), sentinel); // 감시병 위에 차례로
+      const node = card.render();
+      // LCP(첫 사진)는 즉시 또렷이, 나머지는 화면에 들어올 때 부드럽게 나타나게 해요.
+      if (!isLcp) {
+        revealOnScroll(node.querySelector(".post-photo"));
+      }
+      feedMain.insertBefore(node, sentinel); // 감시병 위에 차례로
     });
     hasMore = result.next !== null; // next 가 null 이면 마지막 페이지
     currentPage += 1;
