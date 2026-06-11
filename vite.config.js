@@ -12,6 +12,15 @@ export default defineConfig({
         feed: 'feed.html',
         profile: 'profile.html',
       },
+      output: {
+        // 자주 바뀌는 화면 코드와, 잘 안 바뀌는 통신 코드(api·api-error)를 갈라둬요.
+        // 이렇게 묶어 두면 화면을 고쳐도 통신 덩어리는 그대로라, 받아둔 걸 다시 안 받아요(캐시 재사용).
+        manualChunks(id) {
+          if (id.includes('/js/api.js') || id.includes('/js/api-error.js')) {
+            return 'core';
+          }
+        },
+      },
     },
   },
 });
