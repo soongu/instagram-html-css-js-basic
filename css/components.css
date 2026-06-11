@@ -12,6 +12,11 @@ article figure {
   margin: 0;
 }
 
+/* <picture> 는 그저 <img> 를 감싸는 상자예요 — 옛 <img> 처럼 블록으로 차지하게 해요 */
+article figure picture {
+  display: block;
+}
+
 article figure img,
 article figure video {
   width: 100%;

@@ -46,9 +46,14 @@ async function loadPage() {
   try {
     const result = await fetchPosts(currentPage); // { data, next, ... }
     result.data.forEach((post, index) => {
+      // 첫 페이지의 첫 게시물 = 화면 맨 위 가장 큰 사진(LCP 후보)이에요.
+      // 이 한 장은 미루지 말고 "먼저 받아 와"라고 일러둬요(priority).
+      const isLcp = currentPage === 1 && index === 0;
       // 매 페이지의 마지막(3번째, index 2) 게시물은 광고 카드로 그려요.
       // 같은 데이터, 다른 모습 — 상속(AdPostCard extends PostCard) 데모예요.
-      const card = index === 2 ? new AdPostCard(post) : new PostCard(post);
+      const card = index === 2
+        ? new AdPostCard(post)
+        : new PostCard(post, { priority: isLcp });
       feedMain.insertBefore(card.render(), sentinel); // 감시병 위에 차례로
     });
     hasMore = result.next !== null; // next 가 null 이면 마지막 페이지

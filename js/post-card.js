@@ -4,8 +4,10 @@
 //      데이터(post)는 constructor 로 받아 두고, render() 가 <article> 을 만들어 돌려줘요.
 
 export class PostCard {
-  constructor(post) {
+  constructor(post, options = {}) {
     this.post = post; // 게시물 데이터(객체)를 인스턴스에 담아 둬요
+    // priority: true 면 "가장 큰 첫 사진(LCP)" — 미루지 말고 먼저 받아 와요
+    this.priority = options.priority ?? false;
   }
 
   // <article> 한 채를 만들어 돌려줘요 — 예전 renderPost(post) 와 화면 모습이 똑같아요.
@@ -29,8 +31,12 @@ export class PostCard {
       <button type="button" class="post-more" popovertarget="postMenu" aria-label="더보기">
         <svg class="ico" aria-hidden="true"><use href="assets/icons.svg#ico-dots"></use></svg></button>
     </header>
-    <figure>
-      <img src="${post.image}" alt="${post.alt}" width="600" height="600" loading="lazy">
+    <figure class="post-photo">
+      <picture>
+        <source type="image/webp" srcset="${post.image}.webp">
+        <img src="${post.image}.jpg" alt="${post.alt}" width="600" height="600"
+             ${this.priority ? 'fetchpriority="high"' : 'loading="lazy"'}>
+      </picture>
     </figure>
     <div class="post-actions">
       <button type="button" class="icon-btn icon-btn-like" aria-label="좋아요">
