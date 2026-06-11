@@ -1,0 +1,11 @@
+# 모든 검색 엔진 크롤러에게 (User-agent: * = 전부)
+User-agent: *
+
+# 사이트 전체를 크롤링해도 좋아요
+Allow: /
+
+# 단, 비공개·관리자 영역은 크롤링하지 마세요 (예시 경로)
+Disallow: /private/
+
+# 사이트 지도 위치 — 크롤러가 여기서 전체 페이지 목록을 받아가요
+Sitemap: https://instagram-clone.example.com/sitemap.xml
