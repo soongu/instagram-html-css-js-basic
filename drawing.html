@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>드로잉 보드 — 마우스로 그리기</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/canvas-demo.css">
+</head>
+<body class="demo-page">
+  <main class="demo-main">
+    <h1 class="demo-title">드로잉 보드</h1>
+    <p class="demo-desc">마우스를 누른 채 움직이면 선이 그려져요.</p>
+    <div class="demo-controls">
+      <label>색 <input type="color" id="pen-color" value="#0095f6" class="demo-input"></label>
+      <label>굵기 <input type="range" id="pen-size" min="1" max="30" value="4"></label>
+      <button type="button" id="clear-board" class="demo-btn demo-btn-ghost">전체 지우기</button>
+    </div>
+    <canvas id="board" width="480" height="360" class="demo-canvas"></canvas>
+  </main>
+  <script type="module" src="js/drawing-board.js"></script>
+</body>
+</html>
