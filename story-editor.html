@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스토리 편집기</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/canvas-demo.css">
+</head>
+<body class="demo-page">
+  <main class="demo-main">
+    <h1 class="demo-title">스토리 편집기</h1>
+    <p class="demo-desc">사진 위에 글자를 얹고, 끌어서 옮기고, PNG로 저장해요.</p>
+    <div class="demo-controls">
+      <input type="text" id="story-text" class="demo-input" placeholder="넣을 글자" maxlength="20">
+      <label>색 <input type="color" id="story-color" value="#ffffff" class="demo-input"></label>
+      <button type="button" id="add-text" class="demo-btn">글자 추가</button>
+      <button type="button" id="save-story" class="demo-btn demo-btn-ghost">PNG 저장</button>
+    </div>
+    <canvas id="editor" width="480" height="600" class="demo-canvas"></canvas>
+  </main>
+  <script type="module" src="js/story-editor.js"></script>
+</body>
+</html>
