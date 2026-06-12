@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시각화 — 주간 좋아요 추이</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/canvas-demo.css">
+  <!-- Chart.js — npm 설치 없이 CDN으로 불러와 전역 Chart 를 써요 (4.5.1) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+</head>
+<body class="demo-page">
+  <main class="demo-main">
+    <h1 class="demo-title">주간 좋아요 추이</h1>
+
+    <section class="demo-block">
+      <h2 class="demo-subtitle">① 직접 그린 막대 차트 (Canvas)</h2>
+      <canvas id="mini-chart" width="480" height="320" class="demo-canvas"></canvas>
+    </section>
+
+    <section class="demo-block">
+      <h2 class="demo-subtitle">② Chart.js로 그린 같은 차트</h2>
+      <canvas id="like-chart" width="480" height="320" class="demo-canvas"></canvas>
+    </section>
+  </main>
+  <script type="module" src="js/mini-chart.js"></script>
+  <script type="module" src="js/like-chart.js"></script>
+</body>
+</html>
