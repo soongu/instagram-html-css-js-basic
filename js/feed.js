@@ -12,6 +12,7 @@ import { setupInfiniteScroll } from "./infinite-scroll.js";
 import { PostCard, AdPostCard } from "./post-card.js";
 import { revealOnScroll } from "./lazy-image.js";
 import { ThemeToggle } from "./theme-toggle.js";
+import { setupImageFilter } from "./image-filter.js";
 
 const feedMain = document.querySelector(".feed-main");
 
@@ -59,6 +60,9 @@ async function loadPage() {
       // LCP(첫 사진)는 즉시 또렷이, 나머지는 화면에 들어올 때 부드럽게 나타나게 해요.
       if (!isLcp) {
         revealOnScroll(node.querySelector(".post-photo"));
+      } else {
+        // H-1: 맨 위 첫 사진에만 'Worker' 데모 버튼을 달아요(무거운 일 → 백그라운드).
+        setupImageFilter(node.querySelector(".post-photo"));
       }
       feedMain.insertBefore(node, sentinel); // 감시병 위에 차례로
     });
