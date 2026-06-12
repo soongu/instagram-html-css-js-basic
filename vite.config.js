@@ -17,6 +17,8 @@ export default defineConfig({
         animation: 'animation.html',
         story: 'story-editor.html',
         stats: 'stats.html',
+        // H-3 Web Components 데모 페이지
+        webcomponents: 'web-components.html',
       },
       output: {
         // 자주 바뀌는 화면 코드와, 잘 안 바뀌는 통신 코드(api·api-error)를 갈라둬요.
