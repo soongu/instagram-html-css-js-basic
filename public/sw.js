@@ -4,7 +4,10 @@
 //      (public 폴더에 두면 사이트 맨 위 '/sw.js' 로 올라가, 사이트 전체를 맡을 수 있어요)
 
 // 캐시(받아둔 파일 보관함)에 이름표를 붙여요. 새 버전을 낼 땐 v2, v3 으로 올려요.
-const CACHE_NAME = "insta-cache-v1";
+const CACHE_NAME = "insta-cache-v1"; // 앱 껍데기(HTML·CSS·JS)
+const IMAGE_CACHE = "insta-images-v1"; // 사진은 따로 보관 — 양이 많아 한도를 따로 관리해요
+const IMAGE_LIMIT = 60; // 사진은 최대 60장까지만 — 넘으면 오래된 것부터 비워요
+const VALID_CACHES = [CACHE_NAME, IMAGE_CACHE];
 
 // 앱이 처음 뜰 때 꼭 필요한 '껍데기' — 미리 받아 캐시에 담아 둬요(precache).
 // 오프라인 안내 페이지도 미리 담아 둬야, 인터넷이 끊긴 뒤에도 보여줄 수 있어요.
@@ -18,12 +21,14 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// 2) activate — 새 버전이 깨어나는 순간. 이름표가 다른 옛 캐시는 비워요.
+// 2) activate — 새 버전이 깨어나는 순간. 지금 쓰는 캐시가 아닌 옛 캐시는 비워요.
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+        keys
+          .filter((key) => !VALID_CACHES.includes(key)) // 지금 쓰는 두 캐시만 남겨요
+          .map((key) => caches.delete(key))
       )
     )
   );
@@ -40,9 +45,9 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // 사진(이미지)은 '캐시 먼저' — 한 번 받은 사진은 캐시에서 바로 꺼내 써요(오프라인도 보임).
+  // 사진(아바타·게시물 이미지)은 '캐시 먼저' + 한도 관리 — 한 번 받은 사진은 오프라인도 보임.
   if (request.destination === "image") {
-    event.respondWith(cacheFirst(request));
+    event.respondWith(cacheFirst(request, IMAGE_CACHE, IMAGE_LIMIT));
     return;
   }
 
@@ -52,18 +57,19 @@ self.addEventListener("fetch", (event) => {
     url.origin === self.location.origin &&
     (request.destination === "style" || request.destination === "script");
   if (isSameOriginAsset) {
-    event.respondWith(cacheFirst(request));
+    event.respondWith(cacheFirst(request, CACHE_NAME));
   }
 });
 
-// 캐시 먼저: 캐시에 있으면 그걸, 없으면 네트워크에서 받아 캐시에 저장하고 돌려줘요.
-async function cacheFirst(request) {
+// 캐시 먼저: 캐시에 있으면 그걸, 없으면 네트워크에서 받아 그 캐시에 저장하고 돌려줘요.
+async function cacheFirst(request, cacheName, maxItems) {
   const cached = await caches.match(request);
   if (cached) return cached; // 캐시에 있으면 네트워크는 건너뛰어요(빠르고, 오프라인도 OK)
 
   const response = await fetch(request);
-  const cache = await caches.open(CACHE_NAME);
+  const cache = await caches.open(cacheName);
   cache.put(request, response.clone()); // 응답은 한 번만 읽을 수 있어 복제(clone) 후 저장
+  if (maxItems) trimCache(cacheName, maxItems); // 사진 캐시는 한도를 넘으면 정리해요
   return response;
 }
 
@@ -75,4 +81,14 @@ async function networkFirst(request) {
     const cached = await caches.match(request);
     return cached || (await caches.match("/offline.html"));
   }
+}
+
+// 캐시에 담긴 사진이 너무 많아지지 않게, 한도를 넘으면 오래된 것부터 덜어내요(저장 공간 절약).
+async function trimCache(cacheName, maxItems) {
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+  if (keys.length <= maxItems) return;
+  // keys() 는 넣은 순서대로예요 — 맨 앞(가장 오래된 것)을 지우고, 한도에 들 때까지 반복해요.
+  await cache.delete(keys[0]);
+  trimCache(cacheName, maxItems);
 }
