@@ -23,6 +23,17 @@
       <user-chip avatar="https://picsum.photos/seed/avatar1/64/64">jaehoon</user-chip>
       <user-chip avatar="https://picsum.photos/seed/avatar2/64/64"><a href="profile.html">minji</a></user-chip>
     </section>
+
+    <section class="demo-block">
+      <h2>&lt;post-card&gt; — 모든 걸 합친 인스타 카드</h2>
+      <post-card
+        username="jaehoon"
+        avatar="https://picsum.photos/seed/avatar1/64/64"
+        image="https://picsum.photos/seed/insta1/600/600"
+        likes="1240">
+        오늘 날씨 최고 ☀️
+      </post-card>
+    </section>
   </main>
 
   <!-- <user-chip> 이 복제해 쓰는 틀(template). 화면에 직접 그려지지 않고, 컴포넌트가 복제해 가요. -->
@@ -37,7 +48,39 @@
     <slot>익명</slot>
   </template>
 
+  <!-- <post-card> 의 카드 틀. 좋아요 자리엔 우리가 만든 <like-button> 이 그대로 들어가 있어요. -->
+  <template id="post-card-tpl">
+    <style>
+      :host {
+        display: block;
+        max-width: 32rem;
+        margin: 1rem auto;
+        border: 1px solid #dbdbdb;
+        border-radius: 8px;
+        background: #fff;
+        overflow: hidden;
+        font-family: system-ui, sans-serif;
+      }
+      .head { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.8rem; }
+      .avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+      .username { font-weight: 600; color: #262626; }
+      .photo { width: 100%; display: block; }
+      .body { padding: 0.6rem 0.8rem; }
+      .caption { margin: 0.4rem 0 0; color: #262626; }
+    </style>
+    <div class="head">
+      <img class="avatar" alt="프로필 사진" width="32" height="32">
+      <strong class="username"></strong>
+    </div>
+    <img class="photo" alt="게시물 사진">
+    <div class="body">
+      <like-button class="like-slot"></like-button>
+      <p class="caption"><slot>내용 없음</slot></p>
+    </div>
+  </template>
+
   <script type="module" src="js/like-button.js"></script>
   <script type="module" src="js/user-chip.js"></script>
+  <script type="module" src="js/post-card-element.js"></script>
 </body>
 </html>
