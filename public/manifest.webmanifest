@@ -1,0 +1,16 @@
+{
+  "name": "Instagram 클론",
+  "short_name": "Instagram",
+  "description": "순수 HTML·CSS·JavaScript로 만든 인스타그램 클론",
+  "lang": "ko",
+  "start_url": "/feed.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#fafafa",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
