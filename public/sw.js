@@ -7,7 +7,8 @@
 const CACHE_NAME = "insta-cache-v1";
 
 // 앱이 처음 뜰 때 꼭 필요한 '껍데기' — 미리 받아 캐시에 담아 둬요(precache).
-const APP_SHELL = ["/feed.html"];
+// 오프라인 안내 페이지도 미리 담아 둬야, 인터넷이 끊긴 뒤에도 보여줄 수 있어요.
+const APP_SHELL = ["/feed.html", "/offline.html"];
 
 // 1) install — 설치되는 순간. 앱 껍데기를 캐시에 미리 담아요.
 self.addEventListener("install", (event) => {
@@ -32,6 +33,12 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return; // 저장(POST) 같은 요청은 캐시하지 않아요
+
+  // 페이지 이동(HTML 문서 요청)은 '네트워크 먼저' — 끊겼으면 오프라인 안내 페이지로.
+  if (request.mode === "navigate") {
+    event.respondWith(networkFirst(request));
+    return;
+  }
 
   // 사진(이미지)은 '캐시 먼저' — 한 번 받은 사진은 캐시에서 바로 꺼내 써요(오프라인도 보임).
   if (request.destination === "image") {
@@ -58,4 +65,14 @@ async function cacheFirst(request) {
   const cache = await caches.open(CACHE_NAME);
   cache.put(request, response.clone()); // 응답은 한 번만 읽을 수 있어 복제(clone) 후 저장
   return response;
+}
+
+// 네트워크 먼저: 네트워크를 먼저 시도하고, 실패(오프라인)하면 캐시나 offline.html 로 폴백해요.
+async function networkFirst(request) {
+  try {
+    return await fetch(request);
+  } catch (error) {
+    const cached = await caches.match(request);
+    return cached || (await caches.match("/offline.html"));
+  }
 }
