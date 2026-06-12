@@ -11,6 +11,12 @@ export default defineConfig({
         main: 'index.html',
         feed: 'feed.html',
         profile: 'profile.html',
+        // H-2 Canvas & 시각화 데모 페이지들
+        canvas: 'canvas.html',
+        drawing: 'drawing.html',
+        animation: 'animation.html',
+        story: 'story-editor.html',
+        stats: 'stats.html',
       },
       output: {
         // 자주 바뀌는 화면 코드와, 잘 안 바뀌는 통신 코드(api·api-error)를 갈라둬요.
