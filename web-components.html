@@ -17,8 +17,27 @@
       <h2>&lt;like-button&gt; — 내가 만든 좋아요 버튼</h2>
       <like-button count="1240"></like-button>
     </section>
+
+    <section class="demo-block">
+      <h2>&lt;user-chip&gt; — &lt;template&gt; + &lt;slot&gt;</h2>
+      <user-chip avatar="https://picsum.photos/seed/avatar1/64/64">jaehoon</user-chip>
+      <user-chip avatar="https://picsum.photos/seed/avatar2/64/64"><a href="profile.html">minji</a></user-chip>
+    </section>
   </main>
 
+  <!-- <user-chip> 이 복제해 쓰는 틀(template). 화면에 직접 그려지지 않고, 컴포넌트가 복제해 가요. -->
+  <template id="user-chip-tpl">
+    <style>
+      :host { display: inline-flex; align-items: center; gap: 0.5rem; }
+      .avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+      /* ::slotted 는 바깥에서 끼워 넣은 콘텐츠를 가리켜요 */
+      ::slotted(*) { font-weight: 600; color: #262626; text-decoration: none; }
+    </style>
+    <img class="avatar" alt="프로필 사진" width="32" height="32">
+    <slot>익명</slot>
+  </template>
+
   <script type="module" src="js/like-button.js"></script>
+  <script type="module" src="js/user-chip.js"></script>
 </body>
 </html>
