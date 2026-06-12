@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame — 튕기는 공</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/canvas-demo.css">
+</head>
+<body class="demo-page">
+  <main class="demo-main">
+    <h1 class="demo-title">requestAnimationFrame 애니메이션</h1>
+    <p class="demo-desc">매 프레임 지우고 다시 그려, 공이 벽에 튕겨요.</p>
+    <div class="demo-controls">
+      <button type="button" id="anim-start" class="demo-btn">시작</button>
+      <button type="button" id="anim-stop" class="demo-btn demo-btn-ghost">멈춤</button>
+    </div>
+    <canvas id="stage" width="480" height="360" class="demo-canvas"></canvas>
+  </main>
+  <script type="module" src="js/canvas-animation.js"></script>
+</body>
+</html>
