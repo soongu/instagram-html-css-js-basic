@@ -1,42 +1,44 @@
 // instagram-clone-frontend/js/like-button.js
-// H-3 Step 4: 좋아요 수를 코드에 박지 말고, HTML 속성으로 바깥에서 받아와요.
-//             <like-button count="1240"></like-button> 처럼요.
+// H-3 Step 5: <like-button> 에 '그림자 방(Shadow DOM)' 을 줘요.
+//             바깥 CSS 가 못 들어오고, 안쪽 스타일도 안 새는 완전한 캡슐화예요.
 
 class LikeButton extends HTMLElement {
-  // 어떤 속성을 '지켜볼지' 미리 알려줘요 — 여기 적은 속성이 바뀔 때만 감지해요.
   static get observedAttributes() {
     return ["count", "liked"];
+  }
+
+  constructor() {
+    super(); // HTMLElement 의 생성자를 먼저 불러요 — 규칙이에요
+    // 이 태그만의 '그림자 방' 을 하나 열어요. open 이면 바깥에서 el.shadowRoot 로 들여다볼 수 있어요.
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
     this.render();
     this.onClick = () => this.toggle();
-    this.addEventListener("click", this.onClick);
+    // 클릭은 그림자 방(shadowRoot) 에서 들어요 — 방 안 버튼의 클릭이 여기로 올라와요.
+    this.shadowRoot.addEventListener("click", this.onClick);
   }
 
   disconnectedCallback() {
-    this.removeEventListener("click", this.onClick);
+    this.shadowRoot.removeEventListener("click", this.onClick);
   }
 
-  // observedAttributes 에 적은 속성이 바뀔 때마다 자동으로 불려요 — 바뀐 값으로 다시 그려요.
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue !== newValue) this.render();
   }
 
-  // count 속성을 평범한 프로퍼티처럼 읽고 쓰게 해줘요 — el.count 로요.
   get count() {
     return Number(this.getAttribute("count")) || 0;
   }
   set count(value) {
-    this.setAttribute("count", value); // 속성을 바꾸면 attributeChangedCallback 이 다시 그려줘요
+    this.setAttribute("count", value);
   }
 
-  // liked 는 '있다/없다' 로 표현해요 — <like-button liked> 처럼 값이 없는 속성.
   get liked() {
     return this.hasAttribute("liked");
   }
 
-  // 좋아요를 켜고 꺼요 — liked 속성을 달거나 떼고, 숫자를 1 올리거나 내려요.
   toggle() {
     if (this.liked) {
       this.removeAttribute("liked");
@@ -47,9 +49,26 @@ class LikeButton extends HTMLElement {
     }
   }
 
+  // 그림자 방 안에 스타일과 마크업을 함께 그려요. 이 <style> 은 바깥으로 절대 안 새요.
   render() {
-    this.innerHTML = `
-      <button type="button" class="like-btn" aria-pressed="${this.liked}">
+    this.shadowRoot.innerHTML = `
+      <style>
+        button {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          border: 0;
+          background: none;
+          padding: 0;
+          font: inherit;
+          cursor: pointer;
+          color: #262626;
+        }
+        .heart { font-size: 1.4rem; line-height: 1; }
+        /* :host 는 <like-button> 태그 자기 자신을 가리켜요 — liked 속성이 있을 때만 빨갛게. */
+        :host([liked]) .heart { color: #ed4956; }
+      </style>
+      <button type="button" aria-pressed="${this.liked}">
         <span class="heart">${this.liked ? "♥" : "♡"}</span>
         <span class="count">${this.count.toLocaleString()}</span>
       </button>
