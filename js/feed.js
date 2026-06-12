@@ -162,3 +162,14 @@ const themeButton = document.querySelector(".theme-toggle");
 if (themeButton) {
   new ThemeToggle(themeButton, "theme").init();
 }
+
+// ===== H-1: 서비스 워커 등록 — 오프라인 저장소 일꾼을 깨워요 =====
+// 브라우저가 지원할 때만(점진적 향상), 페이지가 다 뜬 뒤에 등록해요.
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").then(
+      (registration) => console.log("[SW] 등록 성공:", registration.scope),
+      (error) => console.error("[SW] 등록 실패:", error)
+    );
+  });
+}
